@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: monepaste_dev
+      POSTGRES_USER: monepaste_dev
+      POSTGRES_PASSWORD: monepaste_dev
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./:/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+    command: yarn dev
+volumes:
+  postgres-data: {}
