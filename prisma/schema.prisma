@@ -10,21 +10,87 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Post {
-  id        Int     @default(autoincrement()) @id
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  Int?
+enum EditorTheme {
+  LIGHT
+  DARK
 }
 
 model User {
-  id            Int       @default(autoincrement()) @id
-  name          String?
-  email         String?   @unique
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  posts         Post[]
-  @@map(name: "users")
+  id Int @id
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  createdPastes Paste[]
+  likedPastes UserPasteLike[]
+
+  editorTheme EditorTheme @default(DARK)
+
+  @@map("users")
+}
+
+enum PasteVisibility {
+  PUBLIC
+  HIDDEN
+  PRIVATE
+}
+
+model Paste {
+  id String @id
+
+  title String
+
+  views BigInt @default(0)
+
+  userLikes UserPasteLike[]
+
+  pasteForks Paste[] @relation("forked_pastes")
+
+  revisions PasteRev[]
+
+  softDeleted Boolean @default(false)
+
+  visibility PasteVisibility @default(PRIVATE)
+
+  expirationDate DateTime?
+
+  creatorId Int?
+  creator User? @relation(fields: [creatorId], references: [id])
+
+  creatorAddr String? @db.Inet
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  forkedPasteId String?
+  forkedPaste Paste? @relation("forked_pastes", fields: [forkedPasteId], references: [id])
+
+  @@map("pastes")
+}
+
+model PasteRev {
+  id Int @default(autoincrement())
+
+  pasteId String
+  paste Paste @relation(fields: [pasteId], references: [id])
+
+  content String
+
+  createdAt DateTime @default(now())
+  
+  @@id([pasteId, id])
+
+  @@map("paste_revs")
+}
+
+model UserPasteLike {
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+
+  pasteId String
+  paste Paste @relation(fields: [pasteId], references: [id])
+
+  @@id([userId, pasteId])
+
+  @@map("user_paste_likes")
 }
