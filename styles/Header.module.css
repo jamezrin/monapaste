@@ -1,0 +1,59 @@
+.actions {
+  display: flex;
+  flex-direction: row;
+  color: #fff;
+}
+
+.button {
+  margin: 0 0.05em;
+  padding: 0 1em;
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+}
+
+.button:hover,
+.button:focus {
+  color: #23a8f2;
+  background: #1f1f1f;
+}
+
+.pasteInfoArea {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+
+  margin: 0 1em;
+}
+
+.title {
+  align-items: center;
+  color: #bfbfbf;
+  outline: none;
+  margin: 0 auto;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.title:hover,
+.title:active,
+.title:focus {
+  background: #1f1f1f;
+}
+
+.title:focus {
+  border: 1px solid #595959;
+  color: #d9d9d9;
+  width: 100%;
+}
+
+.userArea {
+  width: 200px;
+}
+
+.userArea:hover {
+  background: #1f1f1f;
+}
