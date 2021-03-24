@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import Editor, { Monaco } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
-const sampleValue = `import React from 'react';
+const sampleCode = `import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
@@ -31,18 +31,49 @@ function NormalEditor() {
     },
   };
 
+  function handleEditorSaveAction(editor: monaco.editor.IStandaloneCodeEditor) {
+    console.log('executed save');
+  }
+
+  function handleSampleDataAction(editor: monaco.editor.IStandaloneCodeEditor) {
+    const value = editor.getValue();
+    if (value.length > 0) {
+      editor.setValue(value + '\n' + sampleCode);
+    } else {
+      editor.setValue(sampleCode);
+    }
+  }
+
   function handleEditorDidMount(
     editor: monaco.editor.IStandaloneCodeEditor,
     monaco: Monaco,
   ) {
     editorRef.current = editor;
+
+    editor.addAction({
+      id: 'save-action',
+      label: 'MonaPaste: Save paste contents',
+      contextMenuGroupId: 'MonaPaste',
+      run: handleEditorSaveAction,
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
+    });
+
+    editor.addAction({
+      id: 'sample-data-action',
+      label: 'MonaPaste: Append sample code',
+      contextMenuGroupId: 'MonaPaste',
+      run: handleSampleDataAction,
+      keybindings: [
+        monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.Insert,
+      ],
+    });
   }
 
   return (
     <Editor
       theme={userTheme}
       defaultLanguage="javascript"
-      value={sampleValue}
+      defaultValue={null}
       onMount={handleEditorDidMount}
       options={monacoOptions}
     />
