@@ -1,4 +1,4 @@
-import HeaderButton from '../../components/header/HeaderButton';
+import HeaderButton from './HeaderButton';
 import {
   VscHeart,
   VscCode,
@@ -11,12 +11,22 @@ import {
 
 import styles from '../../styles/Header.module.css';
 
-function HeaderActions() {
+type ViewerType = 'BOTH' | 'OWNER' | 'NOT_OWNER';
+
+function HeaderPasteActions() {
+  const viewerType: ViewerType = 'BOTH';
+
+  const isOwner = viewerType === 'BOTH' || viewerType === 'OWNER';
+  const isNotOwner = viewerType === 'BOTH' || viewerType === 'NOT_OWNER';
+
   return (
     <div className={styles.actions}>
-      <HeaderButton>
-        <VscSave title="Save" />
-      </HeaderButton>
+      {isOwner && (
+        <HeaderButton>
+          <VscSave title="Save" />
+        </HeaderButton>
+      )}
+
       <HeaderButton>
         <VscRepoForked title="Fork" />
       </HeaderButton>
@@ -26,17 +36,24 @@ function HeaderActions() {
       <HeaderButton>
         <VscCode title="Raw" />
       </HeaderButton>
-      <HeaderButton>
-        <VscHeart title="Heart" />
-      </HeaderButton>
+
+      {isNotOwner && (
+        <HeaderButton>
+          <VscHeart title="Heart" />
+        </HeaderButton>
+      )}
+
       <HeaderButton>
         <VscHistory title="Revisions" />
       </HeaderButton>
-      <HeaderButton>
-        <VscSettings title="Settings" />
-      </HeaderButton>
+
+      {isOwner && (
+        <HeaderButton>
+          <VscSettings title="Settings" />
+        </HeaderButton>
+      )}
     </div>
   );
 }
 
-export default HeaderActions;
+export default HeaderPasteActions;

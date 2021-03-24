@@ -1,3 +1,10 @@
 module.exports = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: '/:id/raw',
+        destination: '/api/paste/:id/raw',
+      },
+    ];
+  },
 };
