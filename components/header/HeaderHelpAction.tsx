@@ -1,6 +1,7 @@
-import HeaderButton from './HeaderButton';
 import { VscQuestion } from 'react-icons/vsc';
 import { useRouter } from 'next/router';
+
+import HeaderButton from './HeaderActionButton';
 
 function HeaderHelpAction() {
   const router = useRouter();

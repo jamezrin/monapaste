@@ -6,9 +6,9 @@ import {
   KeyboardEvent,
   FocusEvent,
 } from 'react';
-import styles from '../../styles/Header.module.css';
+import { css } from '@emotion/react';
 
-function HeaderTitle() {
+function HeaderEditableTitle() {
   const [paste, setPaste] = useState({
     title: 'Unnamed Paste',
   });
@@ -47,7 +47,26 @@ function HeaderTitle() {
     <p
       contentEditable="true"
       spellCheck="false"
-      className={styles.title}
+      css={css`
+        align-items: center;
+        color: var(--gray-6);
+        outline: none;
+        margin: 0 auto;
+        padding: 3px 6px;
+        border-radius: 3px;
+
+        &:hover,
+        &:active,
+        &:focus {
+          background: var(--gray-11);
+        }
+
+        &:focus {
+          border: 1px solid var(--gray-8);
+          color: var(--gray-5);
+          width: 100%;
+        }
+      `}
       onKeyDown={handleKeyDown}
       onInput={handleInput}
       onBlur={handleBlur}
@@ -56,4 +75,4 @@ function HeaderTitle() {
   );
 }
 
-export default HeaderTitle;
+export default HeaderEditableTitle;

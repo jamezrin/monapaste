@@ -1,11 +1,19 @@
-import styles from '../../styles/Header.module.css';
+import { css } from '@emotion/react';
 
-import HeaderTitle from './HeaderTitle';
+import HeaderEditableTitle from './HeaderEditableTitle';
 
 function HeaderPasteInfo() {
   return (
-    <div className={styles.pasteInfoArea}>
-      <HeaderTitle />
+    <div
+      css={css`
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-grow: 1;
+        margin: 0 1em;
+      `}
+    >
+      <HeaderEditableTitle />
     </div>
   );
 }

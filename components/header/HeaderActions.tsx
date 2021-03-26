@@ -1,4 +1,5 @@
-import HeaderButton from './HeaderButton';
+import { Paste } from '@prisma/client';
+import { Session } from 'next-auth';
 import {
   VscHeart,
   VscCode,
@@ -9,9 +10,14 @@ import {
   VscSettings,
 } from 'react-icons/vsc';
 
-import styles from '../../styles/Header.module.css';
+import HeaderButton from './HeaderActionButton';
 
 type ViewerType = 'BOTH' | 'OWNER' | 'NOT_OWNER';
+
+type Props = {
+  session: Session;
+  paste: Paste;
+};
 
 function HeaderPasteActions() {
   const viewerType: ViewerType = 'BOTH';
@@ -20,7 +26,7 @@ function HeaderPasteActions() {
   const isNotOwner = viewerType === 'BOTH' || viewerType === 'NOT_OWNER';
 
   return (
-    <div className={styles.actions}>
+    <>
       {isOwner && (
         <HeaderButton>
           <VscSave title="Save" />
@@ -52,7 +58,7 @@ function HeaderPasteActions() {
           <VscSettings title="Settings" />
         </HeaderButton>
       )}
-    </div>
+    </>
   );
 }
 
