@@ -1,17 +1,19 @@
-function ResetButton(props) {
+import { css } from '@emotion/react';
+
+function ResetButton({ children, ...props }) {
   return (
-    <>
-      <style jsx>{`
-        button {
-          background: none;
-          border: inherit;
-          cursor: pointer;
-          outline: inherit;
-          font: inherit;
-        }
-      `}</style>
-      <button {...props} />
-    </>
+    <button
+      {...props}
+      css={css`
+        background: none;
+        border: inherit;
+        cursor: pointer;
+        outline: inherit;
+        font: inherit;
+      `}
+    >
+      {children}
+    </button>
   );
 }
 
