@@ -81,7 +81,7 @@ enum PasteStatus {
 model Paste {
   id             String          @id
   title          String?
-  views          BigInt          @default(0)
+  views          Int             @default(0)
   status         PasteStatus     @default(OK)
   visibility     PasteVisibility @default(PUBLIC)
   expirationDate DateTime?       @map("expiration_date")
@@ -104,10 +104,11 @@ model Paste {
 }
 
 model PasteRev {
-  id        Int      @default(autoincrement())
-  pasteId   String   @map("paste_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  content   String
+  id           Int      @default(autoincrement())
+  pasteId      String   @map("paste_id")
+  createdAt    DateTime @default(now()) @map("created_at")
+  content      String
+  languageName String?  @map("language_name")
 
   // relations
   paste Paste @relation(fields: [pasteId], references: [id])

@@ -7,32 +7,14 @@ import HeaderPasteInfo from 'components/header/HeaderPasteInfo';
 import HeaderHelpAction from 'components/header/HeaderHelpAction';
 import HeaderLoginAction from 'components/header/HeaderLoginAction';
 import NormalEditor from 'components/editor/NormalEditor';
+import { BaseMain, BaseHeader, BaseBody } from 'components/layout/BaseLayout';
 
-function PastePage() {
+function NewPastePage() {
   const [session, loading] = useSession();
 
   return (
-    <main
-      css={css`
-        height: 100vh;
-        max-height: 100vh;
-        display: flex;
-        flex-direction: column;
-
-        overflow: hidden;
-      `}
-    >
-      <header
-        css={css`
-          --height: 40px;
-          height: var(--height);
-          min-height: var(--height);
-          background: var(--gray-12);
-
-          display: flex;
-          flex-direction: row;
-        `}
-      >
+    <BaseMain>
+      <BaseHeader>
         <HeaderPasteActions />
         <HeaderPasteInfo />
         <HeaderHelpAction />
@@ -42,17 +24,13 @@ function PastePage() {
         ) : (
           <HeaderLoginAction />
         )}
-      </header>
-      <article
-        css={css`
-          flex-grow: 1;
-          overflow: hidden;
-        `}
-      >
+      </BaseHeader>
+
+      <BaseBody>
         <NormalEditor />
-      </article>
-    </main>
+      </BaseBody>
+    </BaseMain>
   );
 }
 
-export default PastePage;
+export default NewPastePage;

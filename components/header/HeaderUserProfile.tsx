@@ -10,9 +10,15 @@ function UserProfileButton(props) {
     <div
       {...props}
       css={css`
+        padding: 0.5em 0.5em;
         background: var(--gray-11);
-        padding: 0.25em 0.5em;
-        color: var(--gray-6);
+        color: var(--gray-4);
+        cursor: pointer;
+
+        &:focus,
+        &:hover {
+          color: var(--primary-brand);
+        }
       `}
       role="button"
       aria-pressed="false"
@@ -51,9 +57,12 @@ function HeaderUserProfile({ session }: Props) {
           user-select: none;
           cursor: pointer;
 
+          color: var(--gray-4);
           background: var(${open ? '--gray-11' : '--gray-15'});
+          border-bottom: none;
 
           &:hover {
+            color: var(--primary-brand);
             background: var(--gray-11);
           }
         `}
@@ -79,7 +88,6 @@ function HeaderUserProfile({ session }: Props) {
         <div
           css={css`
             padding: 0 1em;
-            color: var(--gray-4);
             text-overflow: ellipsis;
             white-space: nowrap;
           `}

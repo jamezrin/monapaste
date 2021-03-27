@@ -1,9 +1,9 @@
 import Head from 'next/head';
 
-import PastePage from 'components/pages/PastePage';
+import NewPastePage from 'components/pages/NewPastePage';
 
 function HomePage() {
-  return <PastePage />;
+  return <NewPastePage />;
 }
 
 export default HomePage;
