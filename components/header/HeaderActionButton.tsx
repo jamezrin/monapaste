@@ -1,4 +1,4 @@
-import ResetButton from 'components/ResetButton';
+import ResetButton from 'components/blocks/ResetButton';
 import { css } from '@emotion/react';
 
 function HeaderButton({ children, ...props }) {
