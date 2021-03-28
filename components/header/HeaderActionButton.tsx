@@ -1,7 +1,7 @@
 import ResetButton from 'components/blocks/ResetButton';
 import { css } from '@emotion/react';
 
-function HeaderButton({ children, ...props }) {
+function HeaderActionButton({ children, ...props }) {
   return (
     <ResetButton
       {...props}
@@ -22,4 +22,4 @@ function HeaderButton({ children, ...props }) {
   );
 }
 
-export default HeaderButton;
+export default HeaderActionButton;

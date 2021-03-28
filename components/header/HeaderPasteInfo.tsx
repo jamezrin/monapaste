@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import HeaderEditableTitle from './HeaderEditableTitle';
 
-function HeaderPasteInfo() {
+function HeaderPasteInfo({ paste }) {
   return (
     <div
       css={css`
@@ -13,7 +13,7 @@ function HeaderPasteInfo() {
         margin: 0 1em;
       `}
     >
-      <HeaderEditableTitle />
+      <HeaderEditableTitle paste={paste} />
     </div>
   );
 }

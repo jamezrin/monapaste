@@ -1,0 +1,80 @@
+import { useSession } from 'next-auth/client';
+import { css } from '@emotion/react';
+
+import HeaderUserProfile from 'components/header/HeaderUserProfile';
+import HeaderPasteInfo from 'components/header/HeaderPasteInfo';
+import HeaderHelpAction from 'components/header/HeaderHelpAction';
+import HeaderLoginAction from 'components/header/HeaderLoginAction';
+import HeaderActionButton from 'components/header/HeaderActionButton';
+import NormalEditor from 'components/editor/NormalEditor';
+import { BaseMain, BaseHeader, BaseBody } from 'components/layout/BaseLayout';
+import HeaderActionSection from 'components/header/HeaderActionSection';
+import { User, Paste, PasteRev } from '@prisma/client';
+import {
+  VscCode,
+  VscHeart,
+  VscHistory,
+  VscNewFile,
+  VscRepoForked,
+  VscSave,
+  VscSettings,
+} from 'react-icons/vsc';
+
+export type SinglePagePasteProps = {
+  paste?: Paste;
+  pasteRev?: PasteRev;
+  error?: Error;
+};
+
+function SinglePastePage({ paste, pasteRev, error }: SinglePagePasteProps) {
+  const [session, loading] = useSession();
+  return (
+    <BaseMain>
+      <BaseHeader>
+        <HeaderActionSection direction="start">
+          <HeaderActionButton>
+            <VscSave title="Save" />
+          </HeaderActionButton>
+          <HeaderActionButton>
+            <VscRepoForked title="Fork" />
+          </HeaderActionButton>
+          <HeaderActionButton>
+            <VscNewFile title="New" />
+          </HeaderActionButton>
+          <HeaderActionButton>
+            <VscCode title="Raw" />
+          </HeaderActionButton>
+          <HeaderActionButton>
+            <VscHeart title="Heart" />
+          </HeaderActionButton>
+          <HeaderActionButton>
+            <VscHistory title="Revisions" />
+          </HeaderActionButton>
+          <HeaderActionButton>
+            <VscSettings title="Settings" />
+          </HeaderActionButton>
+        </HeaderActionSection>
+
+        <HeaderPasteInfo paste={paste} />
+
+        <HeaderActionSection direction="end">
+          <HeaderHelpAction />
+          {session ? (
+            <HeaderUserProfile session={session} />
+          ) : (
+            <HeaderLoginAction />
+          )}
+        </HeaderActionSection>
+      </BaseHeader>
+
+      <BaseBody>
+        <NormalEditor
+          content={pasteRev.content}
+          language={pasteRev.languageName}
+        />
+      </BaseBody>
+    </BaseMain>
+  );
+}
+
+export default SinglePastePage;

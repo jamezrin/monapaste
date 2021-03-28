@@ -8,5 +8,4 @@ const ResetButton = styled.button`
   font: inherit;
   appearance: none;
 `;
-
 export default ResetButton;

@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { css } from '@emotion/react';
 
-function HeaderEditableTitle() {
+function HeaderEditableTitle({ paste: x }) {
   const [paste, setPaste] = useState({
     title: 'Unnamed Paste',
   });
