@@ -1,39 +1,75 @@
-import { Paste, PasteRev } from '.prisma/client';
+import { Paste, PasteRev, PasteStatus, PasteVisibility } from '.prisma/client';
 import prisma from 'lib/prisma';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
+import SinglePastePage, {
+  SinglePagePasteProps,
+} from 'components/pages/SinglePastePage';
+import { User } from '@prisma/client';
+import { AccessForbiddenError, ResourceNotFoundError } from 'lib/errors';
 
-type SinglePasteRev = Paste & {
-  rev: PasteRev;
-};
-
-type ViewPasteProps = {
-  paste: SinglePasteRev;
-};
-
-type ViewPasteParams = {
+type QueryParams = {
   id: string;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
-  const session = getSession({ req });
-  const pasteId = params;
-
-  const paste = await prisma.paste.findFirst({});
-  const pasteRev = await prisma.pasteRev.findFirst({});
-
-  return {
-    props: {
-      paste: {
-        ...paste,
-        rev: pasteRev,
-      },
-    },
-  };
-};
-
-function PastePage({ paste }: ViewPasteProps) {
-  return <div>paste page {paste.rev}</div>;
+function PastePage(props: SinglePagePasteProps) {
+  return <SinglePastePage {...props} />;
 }
 
 export default PastePage;
+
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  params,
+}) => {
+  const session = await getSession({ req });
+
+  const { id } = params as QueryParams;
+
+  const paste = await prisma.paste.findFirst({
+    where: { id },
+  });
+
+  if (!paste) {
+    return {
+      props: { error: ResourceNotFoundError },
+    };
+  }
+
+  let user: User;
+  if (session) {
+    user = await prisma.user.findFirst({
+      where: { email: session.user.email },
+    });
+  }
+
+  if (paste.status !== PasteStatus.OK) {
+    return {
+      props: { error: AccessForbiddenError },
+    };
+  }
+
+  if (paste.visibility === PasteVisibility.PRIVATE) {
+    if (!user || paste.creatorId !== user.id) {
+      return {
+        props: { error: AccessForbiddenError },
+      };
+    }
+  }
+
+  const pasteRev = await prisma.pasteRev.findFirst({
+    where: { paste },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    take: 1,
+  });
+
+  return {
+    props: {
+      paste,
+      pasteRev,
+    },
+  };
+};

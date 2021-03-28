@@ -19,6 +19,7 @@ export default async function handler(
   const session = await getSession({ req });
 
   const pasteId = nanoid();
+
   const pasteCreateArgs: Prisma.PasteCreateArgs = {
     data: {
       id: pasteId,
@@ -55,6 +56,7 @@ export default async function handler(
   }
 
   const createdPaste = await prisma.paste.create(pasteCreateArgs);
+
   res.send(createdPaste);
   res.status(StatusCodes.CREATED);
   res.end();
