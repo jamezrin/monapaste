@@ -1,4 +1,4 @@
-import { useState, createContext, useContext } from 'react';
+import { useState, createContext, useContext, useEffect } from 'react';
 
 export type PasteDraft = {
   title: string;
@@ -42,8 +42,6 @@ export const PasteDraftContextProvider = ({
   children,
 }: React.PropsWithChildren<Props>) => {
   const loadPasteDraftState = () => {
-    if (typeof window === 'undefined') return initialValue;
-
     try {
       const item = window.localStorage.getItem(localStorageKey);
       return item ? JSON.parse(item) : initialValue;
@@ -54,8 +52,6 @@ export const PasteDraftContextProvider = ({
   };
 
   const savePasteDraftState = (value: PasteDraft): boolean => {
-    if (typeof window === 'undefined') return false;
-
     try {
       const item = JSON.stringify(value);
       window.localStorage.setItem(localStorageKey, item);
@@ -66,9 +62,11 @@ export const PasteDraftContextProvider = ({
     return false;
   };
 
-  const [statePasteDraft, setStatePasteDraft] = useState<PasteDraft>(() =>
-    loadPasteDraftState(),
+  const [statePasteDraft, setStatePasteDraft] = useState<PasteDraft>(
+    initialValue,
   );
+
+  useEffect(() => setStatePasteDraft(loadPasteDraftState()), []);
 
   const updatePasteDraft = (valueOrSetter: PasteDraft) => {
     const value =

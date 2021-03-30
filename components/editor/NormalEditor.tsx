@@ -1,12 +1,14 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Editor, { Monaco } from '@monaco-editor/react';
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
 type Props = {
   content?: string;
-  onSaveContent: (() => any);
   language?: string;
   userTheme?: string;
+  onContentSave?: () => any;
+  onContentChange?: (content: string) => any;
+  onEditorWillMount?: (monaco: Monaco) => any;
+  onEditorDidMount?: (editor: any, monaco: Monaco) => any;
 };
 
 const sampleCode = `import React from 'react';
@@ -27,7 +29,7 @@ ReactDOM.render(
 serviceWorker.unregister();
 `;
 
-function handleSampleDataAction(editor: monaco.editor.IStandaloneCodeEditor) {
+function handleSampleDataAction(editor) {
   const value = editor.getValue();
   if (value.length > 0) {
     editor.setValue(value + '\n' + sampleCode);
@@ -36,19 +38,24 @@ function handleSampleDataAction(editor: monaco.editor.IStandaloneCodeEditor) {
   }
 }
 
+const editorOptions = {
+  padding: {
+    top: 8,
+  },
+};
+
 function NormalEditor({
   userTheme = 'vs-dark',
   content,
   language,
-  onSaveContent,
+  onContentSave,
+  onContentChange,
+  onEditorWillMount,
+  onEditorDidMount,
 }: React.PropsWithChildren<Props>) {
-  //const editorRef = useRef<StandaloneCodeEditor>(null);
+  const editorRef = useRef<any>(null);
 
-  function handleEditorDidMount(
-    editor: monaco.editor.IStandaloneCodeEditor,
-    monaco: Monaco,
-  ) {
-    //editorRef.current = editor;
+  const handleEditorDidMount = (editor, monaco: Monaco) => {
     editor.addAction({
       id: 'sample-data-action',
       label: 'MonaPaste: Append sample code',
@@ -63,29 +70,42 @@ function NormalEditor({
       id: 'save-action',
       label: 'MonaPaste: Save paste contents',
       contextMenuGroupId: 'MonaPaste',
-      run: () => onSaveContent(),
+      run: () => onContentSave(),
       keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
     });
-  }
 
-  function handleEditorWillMount(monaco: Monaco) {
+    editorRef.current = editor;
+
+    if (onEditorDidMount) {
+      onEditorDidMount(editor, monaco);
+    }
+  };
+
+  const handleEditorWillMount = (monaco: Monaco) => {
+    if (onEditorWillMount) {
+      onEditorWillMount(monaco);
+    }
+
     // TODO: Register other languages
-  }
+  };
 
-  const options = {
-    padding: {
-      top: 8,
-    },
+  const handleEditorContentChange = () => {
+    if (onContentChange) {
+      onContentChange(editorRef.current.getValue());
+    }
   };
 
   return (
     <Editor
       theme={userTheme}
-      defaultLanguage={language}
-      defaultValue={content}
+      defaultValue={null}
+      defaultLanguage={null}
+      value={content}
+      language={language}
       beforeMount={handleEditorWillMount}
+      onChange={handleEditorContentChange}
       onMount={handleEditorDidMount}
-      options={options}
+      options={editorOptions}
     />
   );
 }
