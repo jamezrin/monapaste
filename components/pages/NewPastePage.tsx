@@ -2,17 +2,20 @@ import { useSession } from 'next-auth/client';
 import { css } from '@emotion/react';
 
 import HeaderUserProfile from 'components/header/HeaderUserProfile';
-import HeaderPasteInfo from 'components/header/HeaderPasteInfo';
 import HeaderHelpAction from 'components/header/HeaderHelpAction';
 import HeaderLoginAction from 'components/header/HeaderLoginAction';
 import HeaderActionButton from 'components/header/HeaderActionButton';
 import NormalEditor from 'components/editor/NormalEditor';
 import { BaseMain, BaseHeader, BaseBody } from 'components/layout/BaseLayout';
-import { VscSave } from 'react-icons/vsc';
 import HeaderActionSection from 'components/header/HeaderActionSection';
+import HeaderPasteInfoSection from 'components/header/HeaderPasteInfoSection';
+import { usePasteDraft } from 'lib/context/PasteDraftContext';
+import { VscSave } from 'react-icons/vsc';
+import { Paste } from '@prisma/client';
 
 function NewPastePage() {
   const [session, loading] = useSession();
+  const { pasteDraft, setPasteDraft } = usePasteDraft();
 
   return (
     <BaseMain>
@@ -23,7 +26,9 @@ function NewPastePage() {
           </HeaderActionButton>
         </HeaderActionSection>
 
-        <HeaderPasteInfo />
+        <HeaderPasteInfoSection>
+          
+        </HeaderPasteInfoSection>
 
         <HeaderActionSection direction="end">
           <HeaderHelpAction />
@@ -36,7 +41,7 @@ function NewPastePage() {
       </BaseHeader>
 
       <BaseBody>
-        <NormalEditor />
+        <NormalEditor onSaveContent={() => {}} />
       </BaseBody>
     </BaseMain>
   );

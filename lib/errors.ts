@@ -1,9 +1,12 @@
-export type Error = {
+export type ApiError = {
   type: ErrorType;
   message?: string;
 };
 
-const error = (type: ErrorType, message?: string): Error => ({ type, message });
+const error = (type: ErrorType, message?: string): ApiError => ({
+  type,
+  message,
+});
 
 enum ErrorType {
   RESOURCE_NOT_FOUND_ERROR = 'RESOURCE_NOT_FOUND_ERROR',

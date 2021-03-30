@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/client';
 import { css } from '@emotion/react';
 
 import HeaderUserProfile from 'components/header/HeaderUserProfile';
-import HeaderPasteInfo from 'components/header/HeaderPasteInfo';
+import HeaderPasteInfo from 'components/header/HeaderPasteInfoSection';
 import HeaderHelpAction from 'components/header/HeaderHelpAction';
 import HeaderLoginAction from 'components/header/HeaderLoginAction';
 import HeaderActionButton from 'components/header/HeaderActionButton';
@@ -19,15 +19,39 @@ import {
   VscSave,
   VscSettings,
 } from 'react-icons/vsc';
+import { ApiError } from 'lib/errors';
+import { OnPasteTitleEdit } from 'components/header/HeaderEditableTitle';
+
+type UserPrefs = {
+  userTheme: string;
+};
 
 export type SinglePagePasteProps = {
   paste?: Paste;
   pasteRev?: PasteRev;
-  error?: Error;
+  userPrefs: UserPrefs;
+  error?: ApiError;
 };
 
-function SinglePastePage({ paste, pasteRev, error }: SinglePagePasteProps) {
+function SinglePastePage({
+  paste,
+  pasteRev,
+  userPrefs,
+  error,
+}: SinglePagePasteProps) {
   const [session, loading] = useSession();
+  if (error) {
+    return <div>{error.type}</div>;
+  }
+
+  const handlePasteTitleEdit: OnPasteTitleEdit = (oldTitle, newTitle) => {
+
+  };
+
+  const handleSaveContent = () => {
+
+  }
+
   return (
     <BaseMain>
       <BaseHeader>
@@ -55,7 +79,12 @@ function SinglePastePage({ paste, pasteRev, error }: SinglePagePasteProps) {
           </HeaderActionButton>
         </HeaderActionSection>
 
-        <HeaderPasteInfo paste={paste} />
+        <HeaderPasteInfo
+          paste={paste}
+          defaultTitle={paste.title}
+          isEditable={true}
+          onPasteTitleEdit={handlePasteTitleEdit}
+        />
 
         <HeaderActionSection direction="end">
           <HeaderHelpAction />
@@ -71,6 +100,8 @@ function SinglePastePage({ paste, pasteRev, error }: SinglePagePasteProps) {
         <NormalEditor
           content={pasteRev.content}
           language={pasteRev.languageName}
+          userTheme={userPrefs.userTheme}
+          onSaveContent={handleSaveContent}
         />
       </BaseBody>
     </BaseMain>
