@@ -19,12 +19,14 @@ export default async function handler(
   const session = await getSession({ req });
 
   const pasteId = nanoid();
+  req.headers;
+  const creatorAddr = req.headers['from'] || req.socket.remoteAddress;
 
   const pasteCreateArgs: Prisma.PasteCreateArgs = {
     data: {
       id: pasteId,
       title: title,
-      creatorAddr: req.socket.remoteAddress,
+      creatorAddr: creatorAddr,
       revisions: {
         create: {
           content: req.body,
