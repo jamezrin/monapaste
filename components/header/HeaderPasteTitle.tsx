@@ -16,6 +16,7 @@ const TitleParagraph = styled.p`
   margin: 0 auto;
   padding: 3px 6px;
   border-radius: 3px;
+  white-space: nowrap;
 
   &:hover,
   &:active,

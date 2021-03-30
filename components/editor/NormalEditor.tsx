@@ -1,12 +1,17 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import Editor, { Monaco } from '@monaco-editor/react';
 
 type Props = {
+  defaultContent?: string;
+  defaultLanguage?: string;
+
   content?: string;
   language?: string;
+
   userTheme?: string;
+
   onContentSave?: () => any;
-  onContentChange?: (content: string) => any;
+  onContentChange?: () => any;
   onEditorWillMount?: (monaco: Monaco) => any;
   onEditorDidMount?: (editor: any, monaco: Monaco) => any;
 };
@@ -45,9 +50,11 @@ const editorOptions = {
 };
 
 function NormalEditor({
-  userTheme = 'vs-dark',
+  defaultContent,
+  defaultLanguage,
   content,
   language,
+  userTheme = 'vs-dark',
   onContentSave,
   onContentChange,
   onEditorWillMount,
@@ -70,7 +77,7 @@ function NormalEditor({
       id: 'save-action',
       label: 'MonaPaste: Save paste contents',
       contextMenuGroupId: 'MonaPaste',
-      run: () => onContentSave(),
+      run: handleContentSaveAction,
       keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
     });
 
@@ -90,16 +97,18 @@ function NormalEditor({
   };
 
   const handleEditorContentChange = () => {
-    if (onContentChange) {
-      onContentChange(editorRef.current.getValue());
-    }
+    if (onContentChange) onContentChange();
+  };
+
+  const handleContentSaveAction = () => {
+    if (onContentSave) onContentSave();
   };
 
   return (
     <Editor
       theme={userTheme}
-      defaultValue={null}
-      defaultLanguage={null}
+      defaultValue={defaultContent}
+      defaultLanguage={defaultLanguage}
       value={content}
       language={language}
       beforeMount={handleEditorWillMount}
