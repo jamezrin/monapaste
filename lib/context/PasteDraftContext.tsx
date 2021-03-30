@@ -1,4 +1,10 @@
-import { useState, createContext, useContext, useEffect } from 'react';
+import {
+  useState,
+  createContext,
+  useContext,
+  useEffect,
+  useCallback,
+} from 'react';
 
 export type PasteDraft = {
   title: string;
@@ -30,18 +36,15 @@ const defaultInitialValue: PasteDraft = {
   title: 'Unnamed Paste',
   visibility: 'PUBLIC',
   language: '',
-  content: '',
+  content: 'test',
 };
-
-export const usePasteDraft = (): PasteDraftContextType =>
-  useContext(PasteDraftContext);
 
 export const PasteDraftContextProvider = ({
   localStorageKey = defaultStorageKey,
   initialValue = defaultInitialValue,
   children,
 }: React.PropsWithChildren<Props>) => {
-  const loadPasteDraftState = () => {
+  const loadPasteDraftState = useCallback(() => {
     try {
       const item = window.localStorage.getItem(localStorageKey);
       return item ? JSON.parse(item) : initialValue;
@@ -49,9 +52,9 @@ export const PasteDraftContextProvider = ({
       console.error('could not load draft state', err);
       return initialValue;
     }
-  };
+  }, []);
 
-  const savePasteDraftState = (value: PasteDraft): boolean => {
+  const savePasteDraftState = useCallback((value: PasteDraft): boolean => {
     try {
       const item = JSON.stringify(value);
       window.localStorage.setItem(localStorageKey, item);
@@ -60,34 +63,38 @@ export const PasteDraftContextProvider = ({
       console.error('could not save draft state', err);
     }
     return false;
-  };
+  }, []);
 
   const [statePasteDraft, setStatePasteDraft] = useState<PasteDraft>(
     initialValue,
   );
 
-  useEffect(() => setStatePasteDraft(loadPasteDraftState()), []);
+  useEffect(() => {
+    setStatePasteDraft(loadPasteDraftState());
+  }, [loadPasteDraftState]);
 
-  const updatePasteDraft = (valueOrSetter: PasteDraft) => {
-    const value =
-      valueOrSetter instanceof Function
-        ? valueOrSetter(statePasteDraft)
-        : valueOrSetter;
+  const updatePasteDraft = useCallback(
+    (valueOrSetter: PasteDraft) => {
+      console.log(statePasteDraft);
+      const value =
+        valueOrSetter instanceof Function
+          ? valueOrSetter(statePasteDraft)
+          : valueOrSetter;
 
-    savePasteDraftState(value);
-    setStatePasteDraft(value);
-  };
-
-  const resetPasteDraft = () => updatePasteDraft(initialValue);
-
-  const providerValue: PasteDraftContextType = {
-    pasteDraft: statePasteDraft,
-    setPasteDraft: updatePasteDraft,
-    resetPasteDraft: resetPasteDraft,
-  };
+      setStatePasteDraft(value);
+      savePasteDraftState(value);
+    },
+    [statePasteDraft],
+  );
 
   return (
-    <PasteDraftContext.Provider value={providerValue}>
+    <PasteDraftContext.Provider
+      value={{
+        pasteDraft: statePasteDraft,
+        setPasteDraft: updatePasteDraft,
+        resetPasteDraft: () => updatePasteDraft(initialValue),
+      }}
+    >
       {children}
     </PasteDraftContext.Provider>
   );

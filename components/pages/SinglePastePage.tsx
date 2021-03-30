@@ -5,6 +5,8 @@ import HeaderUserProfile from 'components/header/HeaderUserProfile';
 import HeaderPasteInfo from 'components/header/HeaderPasteInfoSection';
 import HeaderHelpAction from 'components/header/HeaderHelpAction';
 import HeaderLoginAction from 'components/header/HeaderLoginAction';
+import HeaderPasteInfoSection from 'components/header/HeaderPasteInfoSection';
+import HeaderPasteTitle from 'components/header/HeaderPasteTitle';
 import HeaderActionButton from 'components/header/HeaderActionButton';
 import NormalEditor from 'components/editor/NormalEditor';
 import { BaseMain, BaseHeader, BaseBody } from 'components/layout/BaseLayout';
@@ -44,9 +46,9 @@ function SinglePastePage({
     return <div>{error.type}</div>;
   }
 
-  const handlePasteTitleEdit: OnPasteTitleEdit = (oldTitle, newTitle) => {};
+  const handlePasteTitleEdit = (oldTitle: string, newTitle: string) => {};
 
-  const handleSaveContent = () => {};
+  const handleTitleChange = () => {};
 
   return (
     <BaseMain>
@@ -75,13 +77,12 @@ function SinglePastePage({
           </HeaderActionButton>
         </HeaderActionSection>
 
-        {/*
-        <HeaderPasteInfo
-          paste={paste}
-          defaultTitle={paste.title}
-          isEditable={true}
-          onPasteTitleEdit={handlePasteTitleEdit}
-        />*/}
+        <HeaderPasteInfoSection>
+          <HeaderPasteTitle
+            pasteTitle={paste.title}
+            onPasteTitleEdit={handleTitleChange}
+          />
+        </HeaderPasteInfoSection>
 
         <HeaderActionSection direction="end">
           <HeaderHelpAction />
@@ -97,8 +98,6 @@ function SinglePastePage({
         <NormalEditor
           content={pasteRev.content}
           language={pasteRev.languageName}
-          userTheme={userPrefs.userTheme}
-          //onSaveContent={handleSaveContent}
         />
       </BaseBody>
     </BaseMain>
