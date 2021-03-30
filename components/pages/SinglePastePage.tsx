@@ -20,7 +20,7 @@ import {
   VscSettings,
 } from 'react-icons/vsc';
 import { ApiError } from 'lib/errors';
-import { OnPasteTitleEdit } from 'components/header/HeaderEditableTitle';
+import { OnPasteTitleEdit } from 'components/header/HeaderPasteTitle';
 
 type UserPrefs = {
   userTheme: string;
@@ -44,13 +44,9 @@ function SinglePastePage({
     return <div>{error.type}</div>;
   }
 
-  const handlePasteTitleEdit: OnPasteTitleEdit = (oldTitle, newTitle) => {
+  const handlePasteTitleEdit: OnPasteTitleEdit = (oldTitle, newTitle) => {};
 
-  };
-
-  const handleSaveContent = () => {
-
-  }
+  const handleSaveContent = () => {};
 
   return (
     <BaseMain>
@@ -79,12 +75,13 @@ function SinglePastePage({
           </HeaderActionButton>
         </HeaderActionSection>
 
+        {/*
         <HeaderPasteInfo
           paste={paste}
           defaultTitle={paste.title}
           isEditable={true}
           onPasteTitleEdit={handlePasteTitleEdit}
-        />
+        />*/}
 
         <HeaderActionSection direction="end">
           <HeaderHelpAction />
@@ -101,7 +98,7 @@ function SinglePastePage({
           content={pasteRev.content}
           language={pasteRev.languageName}
           userTheme={userPrefs.userTheme}
-          onSaveContent={handleSaveContent}
+          //onSaveContent={handleSaveContent}
         />
       </BaseBody>
     </BaseMain>
