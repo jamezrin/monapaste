@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
 import { nanoid } from 'nanoid';
-import { StatusCodes } from 'http-status-codes';
+import HttpStatus from 'http-status-codes';
 import type { Prisma } from '@prisma/client';
 import prisma from 'lib/prisma';
 
@@ -19,7 +19,6 @@ export default async function handler(
   const session = await getSession({ req });
 
   const pasteId = nanoid();
-  req.headers;
   const creatorAddr = req.headers['from'] || req.socket.remoteAddress;
 
   const pasteCreateArgs: Prisma.PasteCreateArgs = {
@@ -59,9 +58,7 @@ export default async function handler(
 
   const createdPaste = await prisma.paste.create(pasteCreateArgs);
 
-  res.send(createdPaste);
-  res.status(StatusCodes.CREATED);
-  res.end();
+  res.status(HttpStatus.CREATED).json(createdPaste);
 }
 
 export const config = {
