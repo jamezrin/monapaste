@@ -67,7 +67,7 @@ function NormalEditor({
       id: 'sample-data-action',
       label: 'MonaPaste: Append sample code',
       contextMenuGroupId: 'MonaPaste',
-      run: handleSampleDataAction,
+      run: (editor: any) => handleSampleDataAction(editor),
       keybindings: [
         monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.Insert,
       ],
@@ -77,7 +77,7 @@ function NormalEditor({
       id: 'save-action',
       label: 'MonaPaste: Save paste contents',
       contextMenuGroupId: 'MonaPaste',
-      run: handleContentSaveAction,
+      run: (editor: any) => handleContentSaveAction(),
       keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
     });
 

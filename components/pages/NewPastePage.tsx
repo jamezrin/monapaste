@@ -1,35 +1,29 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/client';
-import { css } from '@emotion/react';
-import { useCallback, useContext, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
+import { Monaco } from '@monaco-editor/react';
+import axios from 'axios';
+import { VscSave, VscNewFile } from 'react-icons/vsc';
 
-import HeaderUserProfile from 'components/header/HeaderUserProfile';
+import NormalEditor from 'components/editor/NormalEditor';
+import HeaderPasteTitle from 'components/header/HeaderPasteTitle';
 import HeaderHelpAction from 'components/header/HeaderHelpAction';
 import HeaderLoginAction from 'components/header/HeaderLoginAction';
+import HeaderUserProfile from 'components/header/HeaderUserProfile';
 import HeaderActionButton from 'components/header/HeaderActionButton';
-import NormalEditor from 'components/editor/NormalEditor';
-import { BaseMain, BaseHeader, BaseBody } from 'components/layout/BaseLayout';
 import HeaderActionSection from 'components/header/HeaderActionSection';
 import HeaderPasteInfoSection from 'components/header/HeaderPasteInfoSection';
-import PasteDraftContext, {
-  usePasteDraft,
-} from 'lib/context/PasteDraftContext';
-import { VscSave, VscDiscard, VscNewFile, VscArchive } from 'react-icons/vsc';
-import { Paste } from '@prisma/client';
-import HeaderPasteTitle from 'components/header/HeaderPasteTitle';
-import { useRouter } from 'next/router';
-import axios from 'axios';
-import { Monaco } from '@monaco-editor/react';
+import { BaseMain, BaseHeader, BaseBody } from 'components/layout/BaseLayout';
+import { PasteDraft, usePasteDraft } from 'lib/context/PasteDraftContext';
 
 function NewPastePage() {
   const [session, loading] = useSession();
   const router = useRouter();
-  const { pasteDraft, setPasteDraft, resetPasteDraft } = useContext(
-    PasteDraftContext,
-  );
+  const { pasteDraft, updatePasteDraft, resetPasteDraft } = usePasteDraft();
   const editorRef = useRef<any>(null);
 
   const handleTitleChange = (oldTitle: string, newTitle: string) => {
-    setPasteDraft((state) => ({
+    updatePasteDraft((state) => ({
       ...state,
       title: newTitle,
     }));
@@ -37,8 +31,6 @@ function NewPastePage() {
 
   const editorContentChangeTimeoutRef = useRef<number | null>(null);
   const handleEditorContentChange = () => {
-    console.log('content change');
-
     if (editorContentChangeTimeoutRef.current) {
       clearTimeout(editorContentChangeTimeoutRef.current);
       editorContentChangeTimeoutRef.current = null;
@@ -47,7 +39,7 @@ function NewPastePage() {
     const content = editorRef.current.getValue();
 
     editorContentChangeTimeoutRef.current = window.setTimeout(() => {
-      setPasteDraft((state) => ({
+      updatePasteDraft((state) => ({
         ...state,
         content,
       }));
@@ -69,16 +61,43 @@ function NewPastePage() {
       withCredentials: true,
     });
 
-    //resetPasteDraft();
+    resetPasteDraft();
 
     const pasteId = response.data.id;
     router.push('/' + pasteId);
   };
 
+  // Prevent stale state because of event callback memoization:
+  // https://reactjs.org/docs/hooks-faq.html#how-to-avoid-passing-callbacks-down
+  // https://codesandbox.io/s/admiring-noyce-w0s6o
+  const pasteDraftRef = useRef<PasteDraft>();
+  useEffect(() => {
+    pasteDraftRef.current = pasteDraft;
+  });
+
+  const [shouldCreate, setShouldCreate] = useState(false);
   const handleEditorContentSave = useCallback(() => {
-    console.log('paste create', pasteDraft);
-    //createPasteAndRedirect();
-  }, []);
+    if (editorContentChangeTimeoutRef.current) {
+      clearTimeout(editorContentChangeTimeoutRef.current);
+      editorContentChangeTimeoutRef.current = null;
+
+      const pasteDraft = pasteDraftRef.current;
+      const content = editorRef.current.getValue();
+
+      updatePasteDraft({
+        ...pasteDraft,
+        content,
+      });
+    }
+
+    setShouldCreate(true);
+  }, [pasteDraftRef]);
+
+  useEffect(() => {
+    if (shouldCreate) {
+      createPasteAndRedirect();
+    }
+  }, [shouldCreate]);
 
   const handleEditorDidMount = (editor: any, monaco: Monaco) => {
     editorRef.current = editor;
@@ -93,13 +112,6 @@ function NewPastePage() {
           </HeaderActionButton>
           <HeaderActionButton onClick={(e) => resetPasteDraft()}>
             <VscNewFile title="Reset" />
-          </HeaderActionButton>
-          <HeaderActionButton
-            onClick={(e) => {
-              console.log('meme', pasteDraft);
-            }}
-          >
-            <VscArchive title="ASD" />
           </HeaderActionButton>
         </HeaderActionSection>
 

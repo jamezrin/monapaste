@@ -1,10 +1,4 @@
-import {
-  useState,
-  createContext,
-  useContext,
-  useEffect,
-  useCallback,
-} from 'react';
+import { useState, createContext, useEffect, useContext } from 'react';
 
 export type PasteDraft = {
   title: string;
@@ -24,7 +18,7 @@ type PasteDraftValueOrSetter =
 
 type PasteDraftContextType = {
   pasteDraft: PasteDraft;
-  setPasteDraft: (valueOrSetter: PasteDraftValueOrSetter) => void;
+  updatePasteDraft: (valueOrSetter: PasteDraftValueOrSetter) => void;
   resetPasteDraft: () => void;
 };
 
@@ -36,7 +30,7 @@ const defaultInitialValue: PasteDraft = {
   title: 'Unnamed Paste',
   visibility: 'PUBLIC',
   language: '',
-  content: 'test',
+  content: '',
 };
 
 export const PasteDraftContextProvider = ({
@@ -44,7 +38,9 @@ export const PasteDraftContextProvider = ({
   initialValue = defaultInitialValue,
   children,
 }: React.PropsWithChildren<Props>) => {
-  const loadPasteDraftState = useCallback(() => {
+  const [pasteDraft, setStatePasteDraft] = useState<PasteDraft>(initialValue);
+
+  const loadPasteDraftState = () => {
     try {
       const item = window.localStorage.getItem(localStorageKey);
       return item ? JSON.parse(item) : initialValue;
@@ -52,9 +48,9 @@ export const PasteDraftContextProvider = ({
       console.error('could not load draft state', err);
       return initialValue;
     }
-  }, []);
+  };
 
-  const savePasteDraftState = useCallback((value: PasteDraft): boolean => {
+  const savePasteDraftState = (value: PasteDraft): boolean => {
     try {
       const item = JSON.stringify(value);
       window.localStorage.setItem(localStorageKey, item);
@@ -63,36 +59,32 @@ export const PasteDraftContextProvider = ({
       console.error('could not save draft state', err);
     }
     return false;
-  }, []);
-
-  const [statePasteDraft, setStatePasteDraft] = useState<PasteDraft>(
-    initialValue,
-  );
+  };
 
   useEffect(() => {
-    setStatePasteDraft(loadPasteDraftState());
-  }, [loadPasteDraftState]);
+    const loadedDraft = loadPasteDraftState();
+    setStatePasteDraft(loadedDraft);
+  }, []);
 
-  const updatePasteDraft = useCallback(
-    (valueOrSetter: PasteDraft) => {
-      console.log(statePasteDraft);
-      const value =
-        valueOrSetter instanceof Function
-          ? valueOrSetter(statePasteDraft)
-          : valueOrSetter;
+  const updatePasteDraft = (valueOrSetter: PasteDraft) => {
+    const value =
+      valueOrSetter instanceof Function
+        ? valueOrSetter(pasteDraft)
+        : valueOrSetter;
+    setStatePasteDraft(value);
+    savePasteDraftState(value);
+  };
 
-      setStatePasteDraft(value);
-      savePasteDraftState(value);
-    },
-    [statePasteDraft],
-  );
+  const resetPasteDraft = () => {
+    updatePasteDraft(initialValue);
+  };
 
   return (
     <PasteDraftContext.Provider
       value={{
-        pasteDraft: statePasteDraft,
-        setPasteDraft: updatePasteDraft,
-        resetPasteDraft: () => updatePasteDraft(initialValue),
+        pasteDraft,
+        updatePasteDraft,
+        resetPasteDraft,
       }}
     >
       {children}
@@ -100,4 +92,14 @@ export const PasteDraftContextProvider = ({
   );
 };
 
-export default PasteDraftContext;
+export const usePasteDraft = () => {
+  const context = useContext(PasteDraftContext);
+
+  if (!context) {
+    throw new Error(
+      'usePasteDraft must be used inside a component wrapped by PasteDraftContextProvider',
+    );
+  }
+
+  return context;
+};
