@@ -96,8 +96,8 @@ function SinglePastePage({
 
       <BaseBody>
         <NormalEditor
-          content={pasteRev.content}
-          language={pasteRev.languageName}
+          defaultContent={pasteRev.content}
+          defaultLanguage={pasteRev.languageName}
         />
       </BaseBody>
     </BaseMain>
