@@ -64,19 +64,29 @@ function NewPastePage() {
     resetPasteDraft();
 
     const pasteId = response.data.id;
-    router.push('/' + pasteId);
+    router.push({
+      pathname: '/[pasteId]',
+      query: {
+        pasteId: pasteId,
+      },
+    });
   };
 
-  // Prevent stale state because of event callback memoization:
-  // https://reactjs.org/docs/hooks-faq.html#how-to-avoid-passing-callbacks-down
-  // https://codesandbox.io/s/admiring-noyce-w0s6o
+  /**
+   * Prevent stale state because of callback function memoization
+   * Use this for functions used by the editor (onContentSave, onContentChange)
+   *
+   * https://github.com/facebook/react/issues/16154
+   * https://reactjs.org/docs/hooks-faq.html#how-to-avoid-passing-callbacks-down
+   * https://codesandbox.io/s/admiring-noyce-w0s6o
+   */
   const pasteDraftRef = useRef<PasteDraft>();
   useEffect(() => {
     pasteDraftRef.current = pasteDraft;
   });
 
   const [shouldCreate, setShouldCreate] = useState(false);
-  const handleEditorContentSave = useCallback(() => {
+  const handleEditorContentSave = () => {
     if (editorContentChangeTimeoutRef.current) {
       clearTimeout(editorContentChangeTimeoutRef.current);
       editorContentChangeTimeoutRef.current = null;
@@ -91,7 +101,7 @@ function NewPastePage() {
     }
 
     setShouldCreate(true);
-  }, [pasteDraftRef]);
+  };
 
   useEffect(() => {
     if (shouldCreate) {

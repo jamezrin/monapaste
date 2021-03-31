@@ -21,9 +21,8 @@ import {
   VscSave,
   VscSettings,
 } from 'react-icons/vsc';
-import { ApiError } from 'lib/errors';
-import { OnPasteTitleEdit } from 'components/header/HeaderPasteTitle';
-
+import { useRouter } from 'next/router';
+import { AppError } from 'lib/errors';
 type UserPrefs = {
   userTheme: string;
 };
@@ -32,7 +31,7 @@ export type SinglePagePasteProps = {
   paste?: Paste;
   pasteRev?: PasteRev;
   userPrefs: UserPrefs;
-  error?: ApiError;
+  error?: AppError;
 };
 
 function SinglePastePage({
@@ -42,6 +41,8 @@ function SinglePastePage({
   error,
 }: SinglePagePasteProps) {
   const [session, loading] = useSession();
+  const router = useRouter();
+
   if (error) {
     return <div>{error.type}</div>;
   }
@@ -63,7 +64,17 @@ function SinglePastePage({
           <HeaderActionButton>
             <VscNewFile title="New" />
           </HeaderActionButton>
-          <HeaderActionButton>
+          <HeaderActionButton
+            onClick={(e) => {
+              console.log(paste);
+              router.push({
+                pathname: '/[pasteId]/raw',
+                query: {
+                  pasteId: paste.id,
+                },
+              });
+            }}
+          >
             <VscCode title="Raw" />
           </HeaderActionButton>
           <HeaderActionButton>

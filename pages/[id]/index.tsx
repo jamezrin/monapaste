@@ -1,12 +1,12 @@
-import { Paste, PasteRev, PasteStatus, PasteVisibility } from '.prisma/client';
-import prisma from 'lib/prisma';
+import { User, PasteStatus, PasteVisibility } from '@prisma/client';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
+
+import prisma from 'lib/prisma';
+import { AccessForbiddenError, ResourceNotFoundError } from 'lib/errors';
 import SinglePastePage, {
   SinglePagePasteProps,
 } from 'components/pages/SinglePastePage';
-import { User } from '@prisma/client';
-import { AccessForbiddenError, ResourceNotFoundError } from 'lib/errors';
 
 type QueryParams = {
   id: string;
