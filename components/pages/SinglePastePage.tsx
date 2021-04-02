@@ -49,7 +49,9 @@ function SinglePastePage({
 
   const handlePasteTitleEdit = (oldTitle: string, newTitle: string) => {};
 
-  const handleTitleChange = () => {};
+  const handleTitleChange = () => {
+    console.log('yes');
+  };
 
   return (
     <BaseMain>

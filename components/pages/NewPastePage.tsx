@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { Monaco } from '@monaco-editor/react';
+import { css } from '@emotion/react';
+import { VscSave, VscNewFile, VscSettings } from 'react-icons/vsc';
 import axios from 'axios';
-import { VscSave, VscNewFile } from 'react-icons/vsc';
 
+import NiceModal from 'components/blocks/NiceModal';
 import NormalEditor from 'components/editor/NormalEditor';
 import HeaderPasteTitle from 'components/header/HeaderPasteTitle';
 import HeaderHelpAction from 'components/header/HeaderHelpAction';
@@ -29,12 +31,16 @@ function NewPastePage() {
     }));
   };
 
-  const editorContentChangeTimeoutRef = useRef<number | null>(null);
-  const handleEditorContentChange = () => {
+  const clearContentChangeTimeout = () => {
     if (editorContentChangeTimeoutRef.current) {
       clearTimeout(editorContentChangeTimeoutRef.current);
       editorContentChangeTimeoutRef.current = null;
     }
+  };
+
+  const editorContentChangeTimeoutRef = useRef<number | null>(null);
+  const handleEditorContentChange = () => {
+    clearContentChangeTimeout();
 
     const content = editorRef.current.getValue();
 
@@ -49,6 +55,8 @@ function NewPastePage() {
   };
 
   const createPasteAndRedirect = async () => {
+    clearContentChangeTimeout();
+
     const response = await axios.post('/api/paste/create', pasteDraft.content, {
       headers: {
         'Content-Type': 'text/plain',
@@ -61,8 +69,6 @@ function NewPastePage() {
       withCredentials: true,
     });
 
-    resetPasteDraft();
-
     const pasteId = response.data.id;
     router.push({
       pathname: '/[pasteId]',
@@ -70,6 +76,8 @@ function NewPastePage() {
         pasteId: pasteId,
       },
     });
+
+    resetPasteDraft();
   };
 
   /**
@@ -103,9 +111,15 @@ function NewPastePage() {
     setShouldCreate(true);
   };
 
+  const handleResetAction = () => {
+    clearContentChangeTimeout();
+    resetPasteDraft();
+  };
+
   useEffect(() => {
     if (shouldCreate) {
       createPasteAndRedirect();
+      setShouldCreate(false);
     }
   }, [shouldCreate]);
 
@@ -113,45 +127,70 @@ function NewPastePage() {
     editorRef.current = editor;
   };
 
+  const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
+  const handleSettingsAction = () => {
+    setSettingsOpen((currentOpen) => !currentOpen);
+  };
+
   return (
-    <BaseMain>
-      <BaseHeader>
-        <HeaderActionSection direction="start">
-          <HeaderActionButton onClick={(e) => handleEditorContentSave()}>
-            <VscSave title="Save" />
-          </HeaderActionButton>
-          <HeaderActionButton onClick={(e) => resetPasteDraft()}>
-            <VscNewFile title="Reset" />
-          </HeaderActionButton>
-        </HeaderActionSection>
+    <>
+      <NiceModal
+        isOpen={settingsOpen}
+        onFocusOutside={() => setSettingsOpen(false)}
+      >
+        <div
+          css={css`
+            width: 400px;
+            height: 300px;
+            background: #fff;
+            border-radius: 4px;
+          `}
+        >
+          Hello world!!
+        </div>
+      </NiceModal>
+      <BaseMain>
+        <BaseHeader>
+          <HeaderActionSection direction="start">
+            <HeaderActionButton onClick={(e) => handleEditorContentSave()}>
+              <VscSave title="Save" />
+            </HeaderActionButton>
+            <HeaderActionButton onClick={(e) => handleResetAction()}>
+              <VscNewFile title="Reset" />
+            </HeaderActionButton>
+            <HeaderActionButton onClick={(e) => handleSettingsAction()}>
+              <VscSettings title="Settings" />
+            </HeaderActionButton>
+          </HeaderActionSection>
 
-        <HeaderPasteInfoSection>
-          <HeaderPasteTitle
-            pasteTitle={pasteDraft.title}
-            onPasteTitleEdit={handleTitleChange}
+          <HeaderPasteInfoSection>
+            <HeaderPasteTitle
+              pasteTitle={pasteDraft.title}
+              onPasteTitleEdit={handleTitleChange}
+            />
+          </HeaderPasteInfoSection>
+
+          <HeaderActionSection direction="end">
+            <HeaderHelpAction />
+            {session ? (
+              <HeaderUserProfile session={session} />
+            ) : (
+              <HeaderLoginAction />
+            )}
+          </HeaderActionSection>
+        </BaseHeader>
+
+        <BaseBody>
+          <NormalEditor
+            content={pasteDraft.content}
+            language={pasteDraft.language}
+            onContentSave={handleEditorContentSave}
+            onContentChange={handleEditorContentChange}
+            onEditorDidMount={handleEditorDidMount}
           />
-        </HeaderPasteInfoSection>
-
-        <HeaderActionSection direction="end">
-          <HeaderHelpAction />
-          {session ? (
-            <HeaderUserProfile session={session} />
-          ) : (
-            <HeaderLoginAction />
-          )}
-        </HeaderActionSection>
-      </BaseHeader>
-
-      <BaseBody>
-        <NormalEditor
-          content={pasteDraft.content}
-          language={pasteDraft.language}
-          onContentSave={handleEditorContentSave}
-          onContentChange={handleEditorContentChange}
-          onEditorDidMount={handleEditorDidMount}
-        />
-      </BaseBody>
-    </BaseMain>
+        </BaseBody>
+      </BaseMain>
+    </>
   );
 }
 
