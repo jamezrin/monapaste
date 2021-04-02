@@ -2,9 +2,9 @@ import { useState, createContext, useEffect, useContext } from 'react';
 
 export type PasteDraft = {
   title: string;
-  content: string;
-  visibility: string;
-  language: string;
+  content?: string;
+  visibility?: string;
+  language?: string;
 };
 
 export type Props = {
@@ -28,9 +28,9 @@ const defaultStorageKey = 'monapaste_pasteDraft_storageKey';
 
 const defaultInitialValue: PasteDraft = {
   title: 'Unnamed Paste',
-  visibility: 'PUBLIC',
-  language: '',
-  content: '',
+  visibility: null,
+  language: null,
+  content: null,
 };
 
 export const PasteDraftContextProvider = ({
@@ -39,6 +39,8 @@ export const PasteDraftContextProvider = ({
   children,
 }: React.PropsWithChildren<Props>) => {
   const [pasteDraft, setStatePasteDraft] = useState<PasteDraft>(initialValue);
+
+  useEffect(() => setStatePasteDraft(loadPasteDraftState()), []);
 
   const loadPasteDraftState = () => {
     try {
@@ -60,11 +62,6 @@ export const PasteDraftContextProvider = ({
     }
     return false;
   };
-
-  useEffect(() => {
-    const loadedDraft = loadPasteDraftState();
-    setStatePasteDraft(loadedDraft);
-  }, []);
 
   const updatePasteDraft = (valueOrSetter: PasteDraft) => {
     const value =

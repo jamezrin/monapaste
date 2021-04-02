@@ -1,6 +1,11 @@
 import HttpStatus from 'http-status-codes';
 import { NextApiHandler } from 'next';
 
+export type AppErrorProp = {
+  type: ErrorType;
+  message?: string;
+};
+
 export class AppError {
   statusCode: number;
   type: ErrorType;
@@ -11,12 +16,19 @@ export class AppError {
     this.type = type;
     this.message = message;
   }
+
+  public toProps(): AppErrorProp {
+    return {
+      type: this.type,
+      message: this.message,
+    };
+  }
 }
 
 export function handleErrors(handler: NextApiHandler): NextApiHandler {
   return async (req, res) => {
     try {
-      await handler(req, res);
+      return await handler(req, res);
     } catch (err) {
       if (err instanceof AppError) {
         const { statusCode, ...errorProps } = err;

@@ -33,7 +33,9 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   if (!paste) {
     return {
-      props: { error: ResourceNotFoundError },
+      props: {
+        error: ResourceNotFoundError.toProps()
+      },
     };
   }
 
@@ -46,14 +48,18 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   if (paste.status !== PasteStatus.OK) {
     return {
-      props: { error: AccessForbiddenError },
+      props: {
+        error: AccessForbiddenError.toProps()
+      },
     };
   }
 
   if (paste.visibility === PasteVisibility.PRIVATE) {
     if (!user || paste.creatorId !== user.id) {
       return {
-        props: { error: AccessForbiddenError },
+        props: {
+          error: AccessForbiddenError.toProps()
+        },
       };
     }
   }
