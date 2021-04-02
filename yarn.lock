@@ -7133,11 +7133,6 @@ nan@^2.12.1:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.2.tgz#f5376400695168f4cc694ac9393d0c9585eeea19"
   integrity sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==
 
-nano-id@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/nano-id/-/nano-id-1.1.0.tgz#0ee02e76f3482c1c148ab1830e45d59cafa304e0"
-  integrity sha1-DuAudvNILBwUirGDDkXVnK+jBOA=
-
 nanoclone@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/nanoclone/-/nanoclone-0.2.1.tgz#dd4090f8f1a110d26bb32c49ed2f5b9235209ed4"
