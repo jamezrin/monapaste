@@ -6,27 +6,38 @@ import NiceOverlay from './NiceOverlay';
 
 type ModalProps = HTMLAttributes<HTMLDivElement> & {
   isOpen: boolean;
-  onFocusOutside?: () => any;
+  onShouldClose?: (reason: CloseReason) => void;
   overlayOpacity?: number;
   wrapperProps?: HTMLAttributes<HTMLDivElement>;
+  [x: string]: any;
 };
+
+export enum CloseReason {
+  CLICK_OUTSIDE = 'CLICK_OUTSIDE',
+  ESCAPE_PRESSED = 'ESCAPE_PRESSED',
+  OTHER = 'OTHER',
+}
 
 function NiceModal({
   isOpen,
-  onFocusOutside,
+  onShouldClose,
   overlayOpacity,
   children,
   wrapperProps,
   ...restProps
 }: ModalProps) {
   const modalInnerRef = useOuterClick(() => {
-    if (onFocusOutside) onFocusOutside();
+    if (onShouldClose) {
+      onShouldClose(CloseReason.CLICK_OUTSIDE);
+    }
   });
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.code === 'Escape') {
       e.preventDefault();
-      if (onFocusOutside) onFocusOutside();
+      if (onShouldClose) {
+        onShouldClose(CloseReason.ESCAPE_PRESSED);
+      }
     }
   };
 

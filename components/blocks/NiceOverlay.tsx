@@ -5,13 +5,14 @@ import styled from '@emotion/styled';
 type OverlayProps = HTMLAttributes<HTMLDivElement> & {
   isOpen: boolean;
   opacity?: number;
+  [x: string]: any;
 };
 
 const overlayElementId = 'niceoverlay-portal';
 
 const defaultOpacity = 0.4;
 
-const OverlayInner = styled.div<{ opacity: number } & any>`
+const OverlayInner = styled.div<{ opacity: number }>`
   z-index: 99999;
   position: fixed;
   top: 0;
@@ -28,6 +29,7 @@ function NiceOverlay({
   ...restProps
 }: OverlayProps) {
   const portalElementRef = useRef<HTMLDivElement>(null);
+  const innerElementRef = useRef<HTMLDivElement>(null);
   const [render, setRender] = useState<boolean>(false);
 
   useEffect(() => {
@@ -47,12 +49,23 @@ function NiceOverlay({
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (innerElementRef.current) {
+      innerElementRef.current.focus();
+    }
+  });
+
   if (!render) {
     return null;
   }
 
   return createPortal(
-    <OverlayInner opacity={opacity} {...restProps}>
+    <OverlayInner
+      tabIndex={-1}
+      ref={innerElementRef}
+      opacity={opacity}
+      {...restProps}
+    >
       {children}
     </OverlayInner>,
     portalElementRef.current,

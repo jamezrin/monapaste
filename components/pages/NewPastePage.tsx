@@ -136,7 +136,7 @@ function NewPastePage() {
     <>
       <NiceModal
         isOpen={settingsOpen}
-        onFocusOutside={() => setSettingsOpen(false)}
+        onShouldClose={(reason) => setSettingsOpen(false)}
       >
         <div
           css={css`
