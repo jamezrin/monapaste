@@ -49,11 +49,17 @@ function NiceOverlay({
     };
   }, [isOpen]);
 
-  useEffect(() => {
+  const focusInnerElement = () => {
     if (innerElementRef.current) {
       innerElementRef.current.focus();
     }
-  });
+  };
+
+  // Always focus the inner overlay element on each render
+  useEffect(() => focusInnerElement());
+
+  // Prevent losing focus by tabbing
+  const handleOnBlur = (e) => focusInnerElement();
 
   if (!render) {
     return null;
@@ -63,6 +69,7 @@ function NiceOverlay({
     <OverlayInner
       tabIndex={-1}
       ref={innerElementRef}
+      onBlur={handleOnBlur}
       opacity={opacity}
       {...restProps}
     >
