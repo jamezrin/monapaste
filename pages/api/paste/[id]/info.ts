@@ -1,22 +1,50 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { PasteStatus, PasteVisibility, User } from '@prisma/client';
+import HttpStatus from 'http-status-codes';
 import { getSession } from 'next-auth/client';
-import { nanoid } from 'nanoid';
-import { StatusCodes } from 'http-status-codes';
-import { PasteVisibility, Prisma } from '@prisma/client';
+
 import prisma from 'lib/prisma';
+import {
+  AccessForbiddenError,
+  ResourceNotFoundError,
+  handleErrors,
+} from 'lib/errors';
 
 type QueryParams = {
   id: string;
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query as QueryParams;
+
   const session = await getSession({ req });
 
-  res.status(StatusCodes.OK);
-  res.end();
+  const paste = await prisma.paste.findFirst({
+    where: { id },
+  });
+
+  if (!paste) {
+    throw ResourceNotFoundError;
+  }
+
+  let user: User;
+  if (session) {
+    user = await prisma.user.findFirst({
+      where: { email: session.user.email },
+    });
+  }
+
+  if (paste.status !== PasteStatus.OK) {
+    throw AccessForbiddenError;
+  }
+
+  if (paste.visibility === PasteVisibility.PRIVATE) {
+    if (!user || paste.creatorId !== user.id) {
+      throw AccessForbiddenError;
+    }
+  }
+
+  res.status(HttpStatus.OK).send(paste);
 }
 
+export default handleErrors(handler);

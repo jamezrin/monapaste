@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 import HttpStatus from 'http-status-codes';
 import type { Prisma } from '@prisma/client';
 import prisma from 'lib/prisma';
+import { handleErrors } from 'lib/errors';
 
 type QueryParams = {
   language: string;
@@ -11,10 +12,7 @@ type QueryParams = {
   visibility: string;
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { language, title, visibility } = req.query as QueryParams;
   const session = await getSession({ req });
 
@@ -68,3 +66,5 @@ export const config = {
     },
   },
 };
+
+export default handleErrors(handler);
