@@ -3,5 +3,8 @@
   "printWidth": 80,
   "trailingComma": "all",
   "singleQuote": true,
-  "semi": true
+  "semi": true,
+  "jsxBracketSameLine": true,
+  "importOrder": ["^@/(.*)$", "^[./]"],
+  "importOrderSeparation": true
 }

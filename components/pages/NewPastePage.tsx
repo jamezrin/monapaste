@@ -7,7 +7,7 @@ import { VscSave, VscNewFile, VscSettings } from 'react-icons/vsc';
 import axios from 'axios';
 
 import NiceModal from 'components/blocks/NiceModal';
-import NormalEditor from 'components/editor/NormalEditor';
+import SinglePasteEditor from 'components/editor/SinglePasteEditor';
 import HeaderPasteTitle from 'components/header/HeaderPasteTitle';
 import HeaderHelpAction from 'components/header/HeaderHelpAction';
 import HeaderLoginAction from 'components/header/HeaderLoginAction';
@@ -96,7 +96,7 @@ function NewPastePage() {
   });
 
   const [shouldCreate, setShouldCreate] = useState(false);
-  const handleEditorContentSave = () => {
+  const handlePasteSave = () => {
     if (editorContentChangeTimeoutRef.current) {
       clearTimeout(editorContentChangeTimeoutRef.current);
       editorContentChangeTimeoutRef.current = null;
@@ -153,7 +153,7 @@ function NewPastePage() {
       <BaseMain>
         <BaseHeader>
           <HeaderActionSection direction="start">
-            <HeaderActionButton onClick={(e) => handleEditorContentSave()}>
+            <HeaderActionButton onClick={(e) => handlePasteSave()}>
               <VscSave title="Save" />
             </HeaderActionButton>
             <HeaderActionButton onClick={(e) => handleResetAction()}>
@@ -182,10 +182,10 @@ function NewPastePage() {
         </BaseHeader>
 
         <BaseBody>
-          <NormalEditor
+          <SinglePasteEditor
             content={pasteDraft.content}
             language={pasteDraft.language}
-            onContentSave={handleEditorContentSave}
+            onContentSave={handlePasteSave}
             onContentChange={handleEditorContentChange}
             onEditorDidMount={handleEditorDidMount}
           />

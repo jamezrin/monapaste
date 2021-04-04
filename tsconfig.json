@@ -13,8 +13,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": ".", // https://nextjs.org/docs/advanced-features/module-path-aliases
-    "jsxImportSource": "@emotion/react" // https://emotion.sh/docs/typescript
+
+    // https://nextjs.org/docs/advanced-features/module-path-aliases
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/lib/*": ["lib/*"]
+    },
+
+    // https://emotion.sh/docs/typescript
+    "jsxImportSource": "@emotion/react"
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

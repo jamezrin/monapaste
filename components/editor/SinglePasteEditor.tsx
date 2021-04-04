@@ -49,7 +49,7 @@ const editorOptions = {
   },
 };
 
-function NormalEditor({
+function SinglePasteEditor({
   defaultContent,
   defaultLanguage,
   content,
@@ -119,4 +119,4 @@ function NormalEditor({
   );
 }
 
-export default NormalEditor;
+export default SinglePasteEditor;
