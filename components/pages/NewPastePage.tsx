@@ -45,10 +45,12 @@ function NewPastePage() {
     const content = editorRef.current.getValue();
 
     editorContentChangeTimeoutRef.current = window.setTimeout(() => {
-      updatePasteDraft((state) => ({
-        ...state,
-        content,
-      }));
+      if (!shouldCreate) {
+        updatePasteDraft((state) => ({
+          ...state,
+          content,
+        }));
+      }
 
       editorContentChangeTimeoutRef.current = null;
     }, 750);
@@ -119,7 +121,6 @@ function NewPastePage() {
   useEffect(() => {
     if (shouldCreate) {
       createPasteAndRedirect();
-      setShouldCreate(false);
     }
   }, [shouldCreate]);
 

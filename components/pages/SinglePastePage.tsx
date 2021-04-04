@@ -23,6 +23,7 @@ import {
 } from 'react-icons/vsc';
 import { useRouter } from 'next/router';
 import { AppError } from 'lib/errors';
+
 type UserPrefs = {
   userTheme: string;
 };
@@ -63,12 +64,15 @@ function SinglePastePage({
           <HeaderActionButton>
             <VscRepoForked title="Fork" />
           </HeaderActionButton>
-          <HeaderActionButton>
+          <HeaderActionButton
+            onClick={(e) => {
+              router.push('/');
+            }}
+          >
             <VscNewFile title="New" />
           </HeaderActionButton>
           <HeaderActionButton
             onClick={(e) => {
-              console.log(paste);
               router.push({
                 pathname: '/[pasteId]/raw',
                 query: {
