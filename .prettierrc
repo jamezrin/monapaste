@@ -5,6 +5,6 @@
   "singleQuote": true,
   "semi": true,
   "jsxBracketSameLine": true,
-  "importOrder": ["^@/(.*)$", "^[./]"],
+  "importOrder": ["^@[a-zA-Z0-9](.*)$", "^@/(.*)$", "^[./]"],
   "importOrderSeparation": true
 }

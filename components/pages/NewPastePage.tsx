@@ -1,22 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import { Monaco } from '@monaco-editor/react';
-import { css } from '@emotion/react';
+import { useEffect, useRef, useState } from 'react';
 import { VscSave, VscNewFile, VscSettings } from 'react-icons/vsc';
-import axios from 'axios';
 
-import NiceModal from 'components/blocks/NiceModal';
-import SinglePasteEditor from 'components/editor/SinglePasteEditor';
-import HeaderPasteTitle from 'components/header/HeaderPasteTitle';
-import HeaderHelpAction from 'components/header/HeaderHelpAction';
-import HeaderLoginAction from 'components/header/HeaderLoginAction';
-import HeaderUserProfile from 'components/header/HeaderUserProfile';
-import HeaderActionButton from 'components/header/HeaderActionButton';
-import HeaderActionSection from 'components/header/HeaderActionSection';
-import HeaderPasteInfoSection from 'components/header/HeaderPasteInfoSection';
-import { BaseMain, BaseHeader, BaseBody } from 'components/layout/BaseLayout';
-import { PasteDraft, usePasteDraft } from 'lib/context/PasteDraftContext';
+import { css } from '@emotion/react';
+import { Monaco } from '@monaco-editor/react';
+
+import NiceModal from '@/components/blocks/NiceModal';
+import SinglePasteEditor from '@/components/editor/SinglePasteEditor';
+import HeaderActionButton from '@/components/header/HeaderActionButton';
+import HeaderActionSection from '@/components/header/HeaderActionSection';
+import HeaderHelpAction from '@/components/header/HeaderHelpAction';
+import HeaderLoginAction from '@/components/header/HeaderLoginAction';
+import HeaderPasteInfoSection from '@/components/header/HeaderPasteInfoSection';
+import HeaderPasteTitle from '@/components/header/HeaderPasteTitle';
+import HeaderUserProfile from '@/components/header/HeaderUserProfile';
+import { BaseMain, BaseHeader, BaseBody } from '@/components/layout/BaseLayout';
+import { PasteDraft, usePasteDraft } from '@/lib/context/PasteDraftContext';
 
 function NewPastePage() {
   const [session, loading] = useSession();
@@ -137,16 +138,14 @@ function NewPastePage() {
     <>
       <NiceModal
         isOpen={settingsOpen}
-        onShouldClose={(reason) => setSettingsOpen(false)}
-      >
+        onShouldClose={(reason) => setSettingsOpen(false)}>
         <div
           css={css`
             width: 400px;
             height: 300px;
             background: #fff;
             border-radius: 4px;
-          `}
-        >
+          `}>
           Hello world!!
         </div>
       </NiceModal>

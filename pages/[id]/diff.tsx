@@ -1,12 +1,13 @@
-import { User, PasteStatus, PasteVisibility } from '@prisma/client';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
 
-import prisma from 'lib/prisma';
-import { AccessForbiddenError, ResourceNotFoundError } from 'lib/errors';
+import { User, PasteStatus, PasteVisibility } from '@prisma/client';
+
 import DiffPastePage, {
   DiffPastePageProps,
-} from 'components/pages/DiffPastePage';
+} from '@/components/pages/DiffPastePage';
+import { AccessForbiddenError, ResourceNotFoundError } from '@/lib/errors';
+import prisma from '@/lib/prisma';
 
 function PastePage(props: DiffPastePageProps) {
   return <DiffPastePage {...props} />;

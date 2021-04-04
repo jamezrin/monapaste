@@ -1,5 +1,6 @@
-import { css } from '@emotion/react';
 import { signIn } from 'next-auth/client';
+
+import { css } from '@emotion/react';
 
 import HeaderButton from './HeaderActionButton';
 
@@ -10,8 +11,7 @@ function HeaderLoginAction() {
         display: flex;
         flex-direction: column;
         justify-content: center;
-      `}
-    >
+      `}>
       <HeaderButton
         css={css`
           background: var(--primary-brand);
@@ -26,8 +26,7 @@ function HeaderLoginAction() {
             background: var(--primary-4);
           }
         `}
-        onClick={() => signIn()}
-      >
+        onClick={() => signIn()}>
         Login
       </HeaderButton>
     </div>

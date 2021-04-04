@@ -82,8 +82,7 @@ export const PasteDraftContextProvider = ({
         pasteDraft,
         updatePasteDraft,
         resetPasteDraft,
-      }}
-    >
+      }}>
       {children}
     </PasteDraftContext.Provider>
   );

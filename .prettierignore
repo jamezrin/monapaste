@@ -1,4 +1,4 @@
 *.d.ts
-
+.next
 build
 coverage

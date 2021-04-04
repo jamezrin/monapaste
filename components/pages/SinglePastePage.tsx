@@ -1,18 +1,7 @@
+import axios from 'axios';
 import { useSession } from 'next-auth/client';
-import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
-
-import HeaderUserProfile from '@/components/header/HeaderUserProfile';
-import HeaderPasteInfo from 'components/header/HeaderPasteInfoSection';
-import HeaderHelpAction from 'components/header/HeaderHelpAction';
-import HeaderLoginAction from 'components/header/HeaderLoginAction';
-import HeaderPasteInfoSection from 'components/header/HeaderPasteInfoSection';
-import HeaderPasteTitle from 'components/header/HeaderPasteTitle';
-import HeaderActionButton from 'components/header/HeaderActionButton';
-import SinglePasteEditor from 'components/editor/SinglePasteEditor';
-import { BaseMain, BaseHeader, BaseBody } from 'components/layout/BaseLayout';
-import HeaderActionSection from 'components/header/HeaderActionSection';
-import { User, Paste, PasteRev } from '@prisma/client';
 import {
   VscCode,
   VscHeart,
@@ -22,10 +11,22 @@ import {
   VscSave,
   VscSettings,
 } from 'react-icons/vsc';
-import { useRouter } from 'next/router';
-import { AppError } from 'lib/errors';
-import axios from 'axios';
+
+import { css } from '@emotion/react';
 import { Monaco } from '@monaco-editor/react';
+import { User, Paste, PasteRev } from '@prisma/client';
+
+import SinglePasteEditor from '@/components/editor/SinglePasteEditor';
+import HeaderActionButton from '@/components/header/HeaderActionButton';
+import HeaderActionSection from '@/components/header/HeaderActionSection';
+import HeaderHelpAction from '@/components/header/HeaderHelpAction';
+import HeaderLoginAction from '@/components/header/HeaderLoginAction';
+import HeaderPasteInfo from '@/components/header/HeaderPasteInfoSection';
+import HeaderPasteInfoSection from '@/components/header/HeaderPasteInfoSection';
+import HeaderPasteTitle from '@/components/header/HeaderPasteTitle';
+import HeaderUserProfile from '@/components/header/HeaderUserProfile';
+import { BaseMain, BaseHeader, BaseBody } from '@/components/layout/BaseLayout';
+import { AppError } from '@/lib/errors';
 
 type UserPrefs = {
   userTheme: string;
@@ -101,8 +102,7 @@ function SinglePastePage({
                   pasteId: paste.id,
                 },
               });
-            }}
-          >
+            }}>
             <VscCode title="Raw" />
           </HeaderActionButton>
           <HeaderActionButton>

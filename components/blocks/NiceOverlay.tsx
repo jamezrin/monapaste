@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, HTMLAttributes } from 'react';
 import { createPortal } from 'react-dom';
+
 import styled from '@emotion/styled';
 
 type OverlayProps = HTMLAttributes<HTMLDivElement> & {
@@ -71,8 +72,7 @@ function NiceOverlay({
       ref={innerElementRef}
       onBlur={handleOnBlur}
       opacity={opacity}
-      {...restProps}
-    >
+      {...restProps}>
       {children}
     </OverlayInner>,
     portalElementRef.current,

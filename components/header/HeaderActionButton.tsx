@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import ResetButton from 'components/blocks/ResetButton';
+import ResetButton from '@/components/blocks/ResetButton';
 
 function HeaderActionButton({ children, ...props }) {
   return (
@@ -16,8 +16,7 @@ function HeaderActionButton({ children, ...props }) {
           color: var(--primary-brand);
           background: var(--gray-11);
         }
-      `}
-    >
+      `}>
       {children}
     </ResetButton>
   );

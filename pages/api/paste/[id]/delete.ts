@@ -1,9 +1,11 @@
+import { StatusCodes } from 'http-status-codes';
+import { nanoid } from 'nanoid';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
-import { nanoid } from 'nanoid';
-import { StatusCodes } from 'http-status-codes';
+
 import type { Prisma } from '@prisma/client';
-import prisma from 'lib/prisma';
+
+import prisma from '@/lib/prisma';
 
 export default async function handler(
   req: NextApiRequest,

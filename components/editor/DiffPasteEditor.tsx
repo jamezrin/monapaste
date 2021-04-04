@@ -1,9 +1,5 @@
 function DiffPasteEditor() {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <div></div>;
 }
 
-export default DiffPasteEditor
+export default DiffPasteEditor;

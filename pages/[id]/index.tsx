@@ -1,12 +1,13 @@
-import { User, PasteStatus, PasteVisibility } from '@prisma/client';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
 
-import prisma from 'lib/prisma';
-import { AccessForbiddenError, ResourceNotFoundError } from 'lib/errors';
+import { User, PasteStatus, PasteVisibility } from '@prisma/client';
+
 import SinglePastePage, {
   SinglePagePasteProps,
-} from 'components/pages/SinglePastePage';
+} from '@/components/pages/SinglePastePage';
+import { AccessForbiddenError, ResourceNotFoundError } from '@/lib/errors';
+import prisma from '@/lib/prisma';
 
 type QueryParams = {
   id: string;
@@ -34,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!paste) {
     return {
       props: {
-        error: ResourceNotFoundError.toProps()
+        error: ResourceNotFoundError.toProps(),
       },
     };
   }
@@ -49,7 +50,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (paste.status !== PasteStatus.OK) {
     return {
       props: {
-        error: AccessForbiddenError.toProps()
+        error: AccessForbiddenError.toProps(),
       },
     };
   }
@@ -58,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     if (!user || paste.creatorId !== user.id) {
       return {
         props: {
-          error: AccessForbiddenError.toProps()
+          error: AccessForbiddenError.toProps(),
         },
       };
     }

@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { Session } from 'next-auth';
 import { signOut } from 'next-auth/client';
+import { useState } from 'react';
+
 import { css } from '@emotion/react';
 
-import useOuterClick from 'lib/hooks/useOuterClick';
-import { Session } from 'next-auth';
+import useOuterClick from '@/lib/hooks/useOuterClick';
 
 function UserProfileButton(props) {
   return (
@@ -22,8 +23,7 @@ function UserProfileButton(props) {
       `}
       role="button"
       aria-pressed="false"
-      tabIndex={0}
-    >
+      tabIndex={0}>
       {props.children}
     </div>
   );
@@ -45,8 +45,7 @@ function HeaderUserProfile({ session }: Props) {
         position: relative;
       `}
       ref={userAreaRef}
-      onClick={() => setOpen(!open)}
-    >
+      onClick={() => setOpen(!open)}>
       <div
         css={css`
           height: 100%;
@@ -65,8 +64,7 @@ function HeaderUserProfile({ session }: Props) {
             color: var(--primary-brand);
             background: var(--gray-11);
           }
-        `}
-      >
+        `}>
         <div
           css={css`
             --diameter: 35px;
@@ -90,8 +88,7 @@ function HeaderUserProfile({ session }: Props) {
             padding: 0 1em;
             text-overflow: ellipsis;
             white-space: nowrap;
-          `}
-        >
+          `}>
           {session.user.name}
         </div>
       </div>
@@ -104,8 +101,7 @@ function HeaderUserProfile({ session }: Props) {
           right: 0;
           z-index: 10000;
           display: ${open ? 'block' : 'none'};
-        `}
-      >
+        `}>
         <UserProfileButton>Your pastes</UserProfileButton>
         <UserProfileButton>Liked pastes</UserProfileButton>
         <UserProfileButton>Public pastes</UserProfileButton>

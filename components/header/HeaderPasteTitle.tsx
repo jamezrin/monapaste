@@ -1,4 +1,5 @@
 import { useRef, useEffect, KeyboardEvent, FocusEvent } from 'react';
+
 import styled from '@emotion/styled';
 
 export type OnPasteTitleEdit = (oldTitle: string, newTitle: string) => void;
@@ -67,8 +68,7 @@ function HeaderPasteTitle({
       onBlur={handleBlur}
       onKeyDown={handleKeyDown}
       contentEditable={isEditable}
-      suppressContentEditableWarning={true}
-    >
+      suppressContentEditableWarning={true}>
       {pasteTitle}
     </TitleParagraph>
   );

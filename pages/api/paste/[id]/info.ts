@@ -1,14 +1,15 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { PasteStatus, PasteVisibility, User } from '@prisma/client';
 import HttpStatus from 'http-status-codes';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
 
-import prisma from 'lib/prisma';
+import { PasteStatus, PasteVisibility, User } from '@prisma/client';
+
 import {
   AccessForbiddenError,
   ResourceNotFoundError,
   handleErrors,
-} from 'lib/errors';
+} from '@/lib/errors';
+import prisma from '@/lib/prisma';
 
 type QueryParams = {
   id: string;

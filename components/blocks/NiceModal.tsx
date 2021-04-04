@@ -1,7 +1,9 @@
 import { HTMLAttributes, KeyboardEvent } from 'react';
+
 import { css } from '@emotion/react';
 
-import useOuterClick from 'lib/hooks/useOuterClick';
+import useOuterClick from '@/lib/hooks/useOuterClick';
+
 import NiceOverlay from './NiceOverlay';
 
 type ModalProps = HTMLAttributes<HTMLDivElement> & {
@@ -51,8 +53,7 @@ function NiceModal({
         align-items: center;
         justify-content: center;
       `}
-      {...restProps}
-    >
+      {...restProps}>
       <div ref={modalInnerRef} id="nicemodal-wrapper" {...wrapperProps}>
         {children}
       </div>
