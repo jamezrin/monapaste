@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
@@ -20,10 +21,10 @@ import { BaseMain, BaseHeader, BaseBody } from '@/components/layout/BaseLayout';
 import { PasteDraft, usePasteDraft } from '@/lib/context/PasteDraftContext';
 
 function NewPastePage() {
-  const [session, loading] = useSession();
   const router = useRouter();
+  const [session, loading] = useSession();
   const { pasteDraft, updatePasteDraft, resetPasteDraft } = usePasteDraft();
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>(null);
 
   const handleTitleChange = (oldTitle: string, newTitle: string) => {
     updatePasteDraft((state) => ({
@@ -115,6 +116,7 @@ function NewPastePage() {
   };
 
   const handleResetAction = () => {
+    editorRef.current.setValue('');
     clearContentChangeTimeout();
     resetPasteDraft();
   };
@@ -125,7 +127,7 @@ function NewPastePage() {
     }
   }, [shouldCreate]);
 
-  const handleEditorDidMount = (editor: any, monaco: Monaco) => {
+  const handleEditorDidMount = (editor, monaco: Monaco) => {
     editorRef.current = editor;
   };
 

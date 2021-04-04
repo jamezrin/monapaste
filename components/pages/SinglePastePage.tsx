@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
@@ -46,15 +47,15 @@ function SinglePastePage({
   error,
 }: SinglePagePasteProps) {
   const [session, loading] = useSession();
-  const editorRef = useRef<any>(null);
   const router = useRouter();
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>(null);
   const [language, setLanguage] = useState<string>();
 
   if (error) {
     return <div>{error.type}</div>;
   }
 
-  const handleEditorDidMount = (editor: any, monaco: Monaco) => {
+  const handleEditorDidMount = (editor, monaco: Monaco) => {
     editorRef.current = editor;
   };
 

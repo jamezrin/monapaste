@@ -1,3 +1,4 @@
+import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { useRef } from 'react';
 
 import Editor, { Monaco } from '@monaco-editor/react';
@@ -11,10 +12,13 @@ type Props = {
 
   userTheme?: string;
 
-  onContentSave?: () => any;
-  onContentChange?: () => any;
-  onEditorWillMount?: (monaco: Monaco) => any;
-  onEditorDidMount?: (editor: any, monaco: Monaco) => any;
+  onContentSave?: () => void;
+  onContentChange?: () => void;
+  onEditorWillMount?: (monaco: Monaco) => void;
+  onEditorDidMount?: (
+    editor: monaco.editor.IStandaloneCodeEditor,
+    monaco: Monaco,
+  ) => void;
 };
 
 const sampleCode = `import React from 'react';
@@ -61,14 +65,14 @@ function SinglePasteEditor({
   onEditorWillMount,
   onEditorDidMount,
 }: React.PropsWithChildren<Props>) {
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>(null);
 
   const handleEditorDidMount = (editor, monaco: Monaco) => {
     editor.addAction({
       id: 'sample-data-action',
       label: 'MonaPaste: Append sample code',
       contextMenuGroupId: 'MonaPaste',
-      run: (editor: any) => handleSampleDataAction(editor),
+      run: handleSampleDataAction,
       keybindings: [
         monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.Insert,
       ],
@@ -78,7 +82,7 @@ function SinglePasteEditor({
       id: 'save-action',
       label: 'MonaPaste: Save paste contents',
       contextMenuGroupId: 'MonaPaste',
-      run: (editor: any) => handleContentSaveAction(),
+      run: handleContentSaveAction,
       keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
     });
 

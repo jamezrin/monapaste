@@ -53,7 +53,7 @@ function DiffPastePage({
     return <div>{error.type}</div>;
   }
 
-  const handleEditorDidMount = (editor: any, monaco: Monaco) => {
+  const handleEditorDidMount = (editor, monaco: Monaco) => {
     editorRef.current = editor;
   };
 

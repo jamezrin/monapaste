@@ -1,5 +1,7 @@
 import { useState, createContext, useEffect, useContext } from 'react';
 
+import { PasteVisibility } from '@prisma/client';
+
 export type PasteDraft = {
   title: string;
   content?: string;
@@ -20,6 +22,7 @@ type PasteDraftContextType = {
   pasteDraft: PasteDraft;
   updatePasteDraft: (valueOrSetter: PasteDraftValueOrSetter) => void;
   resetPasteDraft: () => void;
+  initialPasteDraft: PasteDraft;
 };
 
 const PasteDraftContext = createContext<PasteDraftContextType>(null);
@@ -28,9 +31,9 @@ const defaultStorageKey = 'monapaste_pasteDraft_storageKey';
 
 const defaultInitialValue: PasteDraft = {
   title: 'Unnamed Paste',
-  visibility: null,
-  language: null,
-  content: null,
+  visibility: PasteVisibility.PUBLIC,
+  language: '',
+  content: '',
 };
 
 export const PasteDraftContextProvider = ({
@@ -82,6 +85,7 @@ export const PasteDraftContextProvider = ({
         pasteDraft,
         updatePasteDraft,
         resetPasteDraft,
+        initialPasteDraft: initialValue,
       }}>
       {children}
     </PasteDraftContext.Provider>
