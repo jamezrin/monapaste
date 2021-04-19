@@ -16,6 +16,8 @@ type QueryParams = {
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { language, title, visibility } = req.query as QueryParams;
+  const content = req.body;
+
   const session = await getSession({ req });
 
   const pasteId = nanoid();
@@ -28,7 +30,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       creatorAddr: creatorAddr,
       revisions: {
         create: {
-          content: req.body,
+          content: content,
           languageName: language,
         },
       },

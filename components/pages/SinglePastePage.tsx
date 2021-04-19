@@ -70,7 +70,20 @@ function SinglePastePage({
     );
   };
 
-  const handlePasteSaveAction = () => {
+  const handleOpenNew = (e) => {
+    router.push('/');
+  };
+
+  const handleOpenRaw = (e) => {
+    router.push({
+      pathname: '/[pasteId]/raw',
+      query: {
+        pasteId: paste.id,
+      },
+    });
+  };
+
+  const updatePasteNewRev = () => {
     const content = editorRef.current.getValue();
 
     axios.post(`/api/paste/${paste.id}/rev_create`, content, {
@@ -86,24 +99,16 @@ function SinglePastePage({
     <BaseMain>
       <BaseHeader>
         <HeaderActionSection direction="start">
-          <HeaderActionButton onClick={(e) => handlePasteSaveAction()}>
+          <HeaderActionButton onClick={(e) => updatePasteNewRev()}>
             <VscSave title="Save" />
           </HeaderActionButton>
           <HeaderActionButton>
             <VscRepoForked title="Fork" />
           </HeaderActionButton>
-          <HeaderActionButton onClick={(e) => router.push('/')}>
+          <HeaderActionButton onClick={handleOpenNew}>
             <VscNewFile title="New" />
           </HeaderActionButton>
-          <HeaderActionButton
-            onClick={(e) => {
-              router.push({
-                pathname: '/[pasteId]/raw',
-                query: {
-                  pasteId: paste.id,
-                },
-              });
-            }}>
+          <HeaderActionButton onClick={handleOpenRaw}>
             <VscCode title="Raw" />
           </HeaderActionButton>
           <HeaderActionButton>
@@ -138,7 +143,7 @@ function SinglePastePage({
         <SinglePasteEditor
           defaultContent={pasteRev.content}
           defaultLanguage={pasteRev.languageName}
-          onContentSave={handlePasteSaveAction}
+          onContentSave={() => updatePasteNewRev()}
           onEditorDidMount={handleEditorDidMount}
         />
       </BaseBody>

@@ -19,6 +19,7 @@ type QueryParams = {
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id, language } = req.query as QueryParams;
+  const content = req.body;
 
   const session = await getSession({ req });
 
@@ -50,7 +51,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const pasteRevCreateArgs: Prisma.PasteRevCreateArgs = {
     data: {
       paste: { connect: { id: paste.id } },
-      content: req.body,
+      content: content,
       languageName: language,
     },
   };

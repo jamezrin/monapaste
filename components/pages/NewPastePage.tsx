@@ -2,8 +2,15 @@ import axios from 'axios';
 import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
-import { VscSave, VscNewFile, VscSettings } from 'react-icons/vsc';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import {
+  VscSave,
+  VscNewFile,
+  VscSettings,
+  VscClearAll,
+  VscRefresh,
+  VscTrash,
+} from 'react-icons/vsc';
 
 import { css } from '@emotion/react';
 import { Monaco } from '@monaco-editor/react';
@@ -19,11 +26,13 @@ import HeaderPasteTitle from '@/components/header/HeaderPasteTitle';
 import HeaderUserProfile from '@/components/header/HeaderUserProfile';
 import { BaseMain, BaseHeader, BaseBody } from '@/components/layout/BaseLayout';
 import { PasteDraft, usePasteDraft } from '@/lib/context/PasteDraftContext';
+import { useEffectRef } from '@/lib/hooks/useEffectRef';
 
 function NewPastePage() {
   const router = useRouter();
   const [session, loading] = useSession();
   const { pasteDraft, updatePasteDraft, resetPasteDraft } = usePasteDraft();
+
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>(null);
 
   const handleTitleChange = (oldTitle: string, newTitle: string) => {
@@ -92,10 +101,7 @@ function NewPastePage() {
    * https://reactjs.org/docs/hooks-faq.html#how-to-avoid-passing-callbacks-down
    * https://codesandbox.io/s/admiring-noyce-w0s6o
    */
-  const pasteDraftRef = useRef<PasteDraft>();
-  useEffect(() => {
-    pasteDraftRef.current = pasteDraft;
-  });
+  const pasteDraftRef = useEffectRef<PasteDraft>(pasteDraft);
 
   const [shouldCreate, setShouldCreate] = useState(false);
   const handlePasteSave = () => {
@@ -158,7 +164,7 @@ function NewPastePage() {
               <VscSave title="Save" />
             </HeaderActionButton>
             <HeaderActionButton onClick={(e) => handleResetAction()}>
-              <VscNewFile title="Reset" />
+              <VscTrash title="Reset" />
             </HeaderActionButton>
             <HeaderActionButton onClick={(e) => handleSettingsAction()}>
               <VscSettings title="Settings" />
