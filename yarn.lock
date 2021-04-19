@@ -1472,10 +1472,10 @@
   dependencies:
     state-local "^1.0.6"
 
-"@monaco-editor/react@4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-4.1.1.tgz#c5579c09e9a06a68eae56ebd2b5df67cdd2d3867"
-  integrity sha512-A9aZAb4fa81unRfwo63dHJpX5hgppYdMTdQVk2RAT7viiFwdfSfxz+k4WHiFdAdhFWYH/99VSec0vpZbQd0yng==
+"@monaco-editor/react@4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-4.1.2.tgz#545db1a05dd677ebf6d8608d1b797a7227118a8b"
+  integrity sha512-srIlPCtUio3mrxx3kCsz4KaJY3TkVIwx7aPf63VMOM7qxeURfDdAE5ujifnHdw07W6Q3Vmaa7Yd9zeG8VenjYA==
   dependencies:
     "@monaco-editor/loader" "^1.0.1"
     prop-types "^15.7.2"
