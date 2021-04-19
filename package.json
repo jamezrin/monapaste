@@ -36,7 +36,7 @@
     "@storybook/react": "6.2.3",
     "@trivago/prettier-plugin-sort-imports": "2.0.2",
     "@types/next-auth": "3.13.0",
-    "@types/node": "14.14.37",
+    "@types/node": "14.14.41",
     "@types/react": "17.0.3",
     "@types/react-dom": "17.0.3",
     "babel-loader": "8.2.2",
