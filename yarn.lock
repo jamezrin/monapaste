@@ -1217,7 +1217,7 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@babel/types@^7.12.1", "@babel/types@^7.12.13", "@babel/types@^7.12.17", "@babel/types@^7.12.7", "@babel/types@^7.13.0", "@babel/types@^7.13.13", "@babel/types@^7.4.4":
+"@babel/types@^7.12.1", "@babel/types@^7.12.13", "@babel/types@^7.12.7", "@babel/types@^7.13.0", "@babel/types@^7.13.13", "@babel/types@^7.4.4":
   version "7.13.13"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.13.13.tgz#dcd8b815b38f537a3697ce84c8e3cc62197df96f"
   integrity sha512-kt+EpC6qDfIaqlP+DIbIJOclYy/A1YXs9dAf/ljbi+39Bcbc073H6jKVpXEr/EoIh5anGn5xq/yRVzKl+uIc9w==
@@ -1242,6 +1242,14 @@
   dependencies:
     "@babel/helper-validator-identifier" "^7.12.11"
     lodash "^4.17.19"
+    to-fast-properties "^2.0.0"
+
+"@babel/types@^7.13.17":
+  version "7.14.1"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.14.1.tgz#095bd12f1c08ab63eff6e8f7745fa7c9cc15a9db"
+  integrity sha512-S13Qe85fzLs3gYRUnrpyeIrBJIMYv33qSTg1qoBwiG6nPKwUWAD9odSzWhEedpwOIzSEI6gbdQIWEMiCI42iBA==
+  dependencies:
+    "@babel/helper-validator-identifier" "^7.14.0"
     to-fast-properties "^2.0.0"
 
 "@babel/types@^7.14.0":
@@ -3385,13 +3393,13 @@ babel-plugin-react-docgen@^4.2.1:
     lodash "^4.17.15"
     react-docgen "^5.0.0"
 
-babel-plugin-superjson-next@0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/babel-plugin-superjson-next/-/babel-plugin-superjson-next-0.2.3.tgz#9a3166a0540cf139fb93270276316776775f122d"
-  integrity sha512-eqcsWLims4qRAL4xGKZiB9GE38ByreslD2SeeDhC0FCnbt7jK7YVCWFYhYslVCniiG1Atstxf6w5ApfsuqwUoQ==
+babel-plugin-superjson-next@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-superjson-next/-/babel-plugin-superjson-next-0.3.0.tgz#86620a2d134a1b0a515d903512cf7f766b394cc1"
+  integrity sha512-fTE8uWUy9OJG7PkRNP094XDdieoBsZR2iatxurbNqLyd4INXpwuuQ246iLu4+dAeQHtGhOJZxsPR8KdbNvdnlQ==
   dependencies:
-    "@babel/helper-module-imports" "^7.12.13"
-    "@babel/types" "^7.12.17"
+    "@babel/helper-module-imports" "^7.13.12"
+    "@babel/types" "^7.13.17"
     hoist-non-react-statics "^3.3.2"
 
 babel-plugin-syntax-jsx@6.18.0, babel-plugin-syntax-jsx@^6.18.0:
