@@ -42,6 +42,6 @@
     "babel-loader": "8.2.2",
     "babel-plugin-superjson-next": "0.3.0",
     "prisma": "2.26.0",
-    "typescript": "4.3.4"
+    "typescript": "4.3.5"
   }
 }
