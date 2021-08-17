@@ -2811,10 +2811,10 @@
     resolve-from "^5.0.0"
     store2 "^2.12.0"
 
-"@trivago/prettier-plugin-sort-imports@2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@trivago/prettier-plugin-sort-imports/-/prettier-plugin-sort-imports-2.0.2.tgz#62c52462220df6fb35815aaefeaa383fc2535ab1"
-  integrity sha512-esk6vplzXYwXQs079wBbKog4AFuZfxpJU+MygiijV0wbAibI0tEm+diFFhYP7B2lAaKKdU4+w+BW+McNZCw9HA==
+"@trivago/prettier-plugin-sort-imports@2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@trivago/prettier-plugin-sort-imports/-/prettier-plugin-sort-imports-2.0.3.tgz#68b2101584a787c6e7ff79fa2dcd2dbe3e20fc4c"
+  integrity sha512-QOc0FcTCDwnCGKSZUgwg2afWXqkBOrHGzfzDEZqS3xo4BGuL1odDGPIF7qdRvUt91pZDr0hnooxNiENnjVAssQ==
   dependencies:
     "@babel/core" "7.13.10"
     "@babel/generator" "7.13.9"
@@ -2824,7 +2824,6 @@
     "@types/lodash" "4.14.168"
     javascript-natural-sort "0.7.1"
     lodash "4.17.21"
-    prettier "2.2.1"
 
 "@types/anymatch@*":
   version "1.3.1"
@@ -8654,7 +8653,7 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
 
-prettier@2.2.1, prettier@~2.2.1:
+prettier@~2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
   integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
