@@ -2811,10 +2811,10 @@
     resolve-from "^5.0.0"
     store2 "^2.12.0"
 
-"@trivago/prettier-plugin-sort-imports@2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@trivago/prettier-plugin-sort-imports/-/prettier-plugin-sort-imports-2.0.3.tgz#68b2101584a787c6e7ff79fa2dcd2dbe3e20fc4c"
-  integrity sha512-QOc0FcTCDwnCGKSZUgwg2afWXqkBOrHGzfzDEZqS3xo4BGuL1odDGPIF7qdRvUt91pZDr0hnooxNiENnjVAssQ==
+"@trivago/prettier-plugin-sort-imports@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@trivago/prettier-plugin-sort-imports/-/prettier-plugin-sort-imports-2.0.4.tgz#2e5bbf80bd87e919202f791008a2fbcdbb2a566f"
+  integrity sha512-SCVUhQdbjn/Z4AY7b9JO00fZCeXxiVuarVxYP0n6cX2ijiQkE5HmGrOk32n0u385OebzQ9bZcrc51lAGLjXnFQ==
   dependencies:
     "@babel/core" "7.13.10"
     "@babel/generator" "7.13.9"
