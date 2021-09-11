@@ -10,6 +10,7 @@ import {
   VscClearAll,
   VscRefresh,
   VscTrash,
+  VscCircleSlash,
 } from 'react-icons/vsc';
 
 import { css } from '@emotion/react';
@@ -83,12 +84,7 @@ function NewPastePage() {
     });
 
     const pasteId = response.data.id;
-    router.push({
-      pathname: '/[pasteId]',
-      query: {
-        pasteId: pasteId,
-      },
-    });
+    router.push(`/${pasteId}`);
 
     resetPasteDraft();
   };
@@ -164,7 +160,7 @@ function NewPastePage() {
               <VscSave title="Save" />
             </HeaderActionButton>
             <HeaderActionButton onClick={(e) => handleResetAction()}>
-              <VscTrash title="Reset" />
+              <VscClearAll title="Reset" />
             </HeaderActionButton>
             <HeaderActionButton onClick={(e) => handleSettingsAction()}>
               <VscSettings title="Settings" />

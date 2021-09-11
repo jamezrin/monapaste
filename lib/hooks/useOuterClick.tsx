@@ -9,6 +9,7 @@ function useOuterClick(callback) {
   useEffect(() => {
     callbackRef.current = callback;
   });
+
   useEffect(() => {
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);

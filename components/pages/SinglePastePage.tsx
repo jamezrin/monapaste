@@ -75,12 +75,7 @@ function SinglePastePage({
   };
 
   const handleOpenRaw = (e) => {
-    router.push({
-      pathname: '/[pasteId]/raw',
-      query: {
-        pasteId: paste.id,
-      },
-    });
+    router.push(`/${paste.id}/raw`);
   };
 
   const updatePasteNewRev = () => {
