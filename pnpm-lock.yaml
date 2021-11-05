@@ -6,7 +6,7 @@ specifiers:
   '@emotion/react': 11.5.0
   '@emotion/styled': 11.3.0
   '@monaco-editor/react': 4.3.1
-  '@prisma/client': 3.4.0
+  '@prisma/client': 3.4.1
   '@storybook/addon-actions': 6.3.12
   '@storybook/addon-essentials': 6.3.12
   '@storybook/addon-links': 6.3.12
@@ -24,7 +24,7 @@ specifiers:
   nanoid: 3.1.30
   next: 11.1.2
   next-auth: 3.29.0
-  prisma: 3.4.0
+  prisma: 3.4.1
   react: 17.0.2
   react-dom: 17.0.2
   react-icons: 4.3.1
@@ -36,13 +36,13 @@ dependencies:
   '@emotion/react': 11.5.0_28e268b6e995f612fbd8c21cb20f5a87
   '@emotion/styled': 11.3.0_35e73d8577c3da6e1694a7ef9df860bb
   '@monaco-editor/react': 4.3.1_f0689466c0c38bde0d57c82418990dab
-  '@prisma/client': 3.4.0_prisma@3.4.0
+  '@prisma/client': 3.4.1_prisma@3.4.1
   axios: 0.24.0
   http-status-codes: 2.1.4
   monaco-editor: 0.29.1
   nanoid: 3.1.30
   next: 11.1.2_4c6e08f106c507054e583164043061aa
-  next-auth: 3.29.0_09cb300a5d7d6ace56c41c9583d1246b
+  next-auth: 3.29.0_84f55f13fe842de967b2ba8d507dcb22
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-icons: 4.3.1_react@17.0.2
@@ -63,7 +63,7 @@ devDependencies:
   '@types/react-dom': 17.0.11
   babel-loader: 8.2.3_@babel+core@7.16.0
   babel-plugin-superjson-next: 0.4.2_next@11.1.2+superjson@1.8.0
-  prisma: 3.4.0
+  prisma: 3.4.1
   typescript: 4.4.4
 
 packages:
@@ -1947,15 +1947,15 @@ packages:
     resolution: {integrity: sha512-jDJTpta+P4p1NZTFVLHJ/TLFVYVcOqv6l8xwOeBKNPMgY/zDYH/YH7SJbvrr/h1RcS9GzbPcLKGzpuK9cV56UA==}
     dev: false
 
-  /@next-auth/prisma-legacy-adapter/0.1.2_cbeb462fb16e87823a6a0cb78f7fb027:
+  /@next-auth/prisma-legacy-adapter/0.1.2_44403f3f32f9cde08f89247895a29194:
     resolution: {integrity: sha512-QpGcRvrnFERkvVFroqS89qDbnskw9AjhvWxO095u3xl/8QVI++Y+doluQdZWuV6PewjrV7xY+uVUEnRhnGM8yQ==}
     peerDependencies:
       '@prisma/client': ^2.16.1
       next-auth: ^3.17.2
     dependencies:
       '@babel/runtime': 7.16.0
-      '@prisma/client': 3.4.0_prisma@3.4.0
-      next-auth: 3.29.0_09cb300a5d7d6ace56c41c9583d1246b
+      '@prisma/client': 3.4.1_prisma@3.4.1
+      next-auth: 3.29.0_84f55f13fe842de967b2ba8d507dcb22
     dev: false
 
   /@next-auth/typeorm-legacy-adapter/0.1.4_next-auth@3.29.0:
@@ -1977,7 +1977,7 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.16.0
-      next-auth: 3.29.0_09cb300a5d7d6ace56c41c9583d1246b
+      next-auth: 3.29.0_84f55f13fe842de967b2ba8d507dcb22
       require_optional: 1.0.1
       typeorm: 0.2.38
     transitivePeerDependencies:
@@ -2164,8 +2164,8 @@ packages:
     resolution: {integrity: sha512-IXf3XA7+XyN7CP9gGh/XB0UxVMlvARGEgGXLubFICsUMGz6Q+DU+i4gGlpOxTjKvXjkJDJC8YdqdKkDj9qZHEQ==}
     dev: true
 
-  /@prisma/client/3.4.0_prisma@3.4.0:
-    resolution: {integrity: sha512-rjnp7dPVArqT/VgeWllUN+5927u224Gud//d16omL2hyXl9BnWzmeZJQ0plTYuP5yCR/M1N4iUC8ysDPlhA08g==}
+  /@prisma/client/3.4.1_prisma@3.4.1:
+    resolution: {integrity: sha512-tUlPSyGiZfmt9xTtvZK8d8cqu76QLCM+rFt7+ezpau/G0VwzetuGVmT28c61Eaw7OW2KmsTHRk8LUxI7HZS3kA==}
     engines: {node: '>=12.6'}
     requiresBuild: true
     peerDependencies:
@@ -2174,16 +2174,16 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85
-      prisma: 3.4.0
+      '@prisma/engines-version': 3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9
+      prisma: 3.4.1
     dev: false
 
-  /@prisma/engines-version/3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85:
-    resolution: {integrity: sha512-acL30wD3lj6qGAN9JIA+fhcd8j5I+Db9d1Pge2jwmK/QVbmbnH+lhTMV5pYIdgxbZWs9R+DoNnOHvUQCOW1xeQ==}
+  /@prisma/engines-version/3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9:
+    resolution: {integrity: sha512-H8bnBT5jLap+0nULBAGjf+xb5XNn4d60U4J9cck+UanyEkeMS3aYCeHvNiQl46XwvN60jkUX8BwV3NOEmPh0SQ==}
     dev: false
 
-  /@prisma/engines/3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85:
-    resolution: {integrity: sha512-jyCjXhX1ZUbzA7+6Hm0iEdeY+qFfpD/RB7iSwMrMoIhkVYvnncSdCLBgbK0yqxTJR2nglevkDY2ve3QDxFciMA==}
+  /@prisma/engines/3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9:
+    resolution: {integrity: sha512-NO4Q88k3CfUpYzfpDD+0wSVCqhaeljCFAGSe1XyvmXAOlMU2AAjCwmRn6S4UXlT9yEGB/LwFjdvGjcgfUQ+Mtw==}
     requiresBuild: true
     dev: true
 
@@ -8116,14 +8116,14 @@ packages:
     resolution: {integrity: sha512-AO81vsIO1k1sM4Zrd6Hu7regmJN1NSiAja10gc4bX3F0wd+9rQmcuHQaHVQCYIEC8iFXnE+mavh23GOt7wBgug==}
     dev: true
 
-  /next-auth/3.29.0_09cb300a5d7d6ace56c41c9583d1246b:
+  /next-auth/3.29.0_84f55f13fe842de967b2ba8d507dcb22:
     resolution: {integrity: sha512-B//4QTv/1Of0D+roZ82URmI6L2JSbkKgeaKI7Mdrioq8lAzp9ff8NdmouvZL/7zwrPe2cUyM6MLYlasfuI3ZIQ==}
     peerDependencies:
       react: ^16.13.1 || ^17
       react-dom: ^16.13.1 || ^17
     dependencies:
       '@babel/runtime': 7.16.0
-      '@next-auth/prisma-legacy-adapter': 0.1.2_cbeb462fb16e87823a6a0cb78f7fb027
+      '@next-auth/prisma-legacy-adapter': 0.1.2_44403f3f32f9cde08f89247895a29194
       '@next-auth/typeorm-legacy-adapter': 0.1.4_next-auth@3.29.0
       futoin-hkdf: 1.4.2
       jose: 1.28.1
@@ -8959,13 +8959,13 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /prisma/3.4.0:
-    resolution: {integrity: sha512-W0AFjVxPOLW5SEnf0ZwbOu4k8ElX98ioFC1E8Gb9Q/nuO2brEwxFJebXglfG+N6zphGbu2bG1I3VAu7aYzR3VA==}
+  /prisma/3.4.1:
+    resolution: {integrity: sha512-APws/xRa1wYd064KV7hByQzWiBMUy/yQ501XXrsRZegXAQ/j1obG2HCk34MEbgn8IqLSRLaXyhCYz4R4HwRmMQ==}
     engines: {node: '>=12.6'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85
+      '@prisma/engines': 3.4.1-2.57771c0558568c7d08bd34c7248af5244ae16bd9
     dev: true
 
   /prismjs/1.25.0:
