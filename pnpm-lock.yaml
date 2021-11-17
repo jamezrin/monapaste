@@ -11,7 +11,7 @@ specifiers:
   '@storybook/addon-essentials': 6.3.12
   '@storybook/addon-links': 6.3.12
   '@storybook/react': 6.3.12
-  '@trivago/prettier-plugin-sort-imports': 2.0.4
+  '@trivago/prettier-plugin-sort-imports': 3.1.1
   '@types/next-auth': 3.13.0
   '@types/node': 14.17.33
   '@types/react': 17.0.35
@@ -56,7 +56,7 @@ devDependencies:
   '@storybook/addon-essentials': 6.3.12_c84eda1f1f6bd7f87d3c1825cf5a400b
   '@storybook/addon-links': 6.3.12_react-dom@17.0.2+react@17.0.2
   '@storybook/react': 6.3.12_2c272164def6b7abcdc026a2c82f2700
-  '@trivago/prettier-plugin-sort-imports': 2.0.4
+  '@trivago/prettier-plugin-sort-imports': 3.1.1
   '@types/next-auth': 3.13.0
   '@types/node': 14.17.33
   '@types/react': 17.0.35
@@ -120,14 +120,14 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.16.0
-      '@babel/generator': 7.13.9
+      '@babel/generator': 7.16.0
       '@babel/helper-compilation-targets': 7.16.0_@babel+core@7.13.10
       '@babel/helper-module-transforms': 7.16.0
       '@babel/helpers': 7.16.0
-      '@babel/parser': 7.13.10
+      '@babel/parser': 7.16.0
       '@babel/template': 7.16.0
-      '@babel/traverse': 7.13.0
-      '@babel/types': 7.13.0
+      '@babel/traverse': 7.16.0
+      '@babel/types': 7.16.0
       convert-source-map: 1.8.0
       debug: 4.3.2
       gensync: 1.0.0-beta.2
@@ -165,7 +165,7 @@ packages:
   /@babel/generator/7.13.9:
     resolution: {integrity: sha512-mHOOmY0Axl/JCTkxTU6Lf5sWOg/v8nUa+Xkt4zMTftX0wqmb6Sh7J8gvcehBw7q0AhrhAR+FDacKjCZ2X8K+Sw==}
     dependencies:
-      '@babel/types': 7.13.0
+      '@babel/types': 7.16.0
       jsesc: 2.5.2
       source-map: 0.5.7
     dev: true
@@ -442,8 +442,8 @@ packages:
       chalk: 2.4.2
       js-tokens: 4.0.0
 
-  /@babel/parser/7.13.10:
-    resolution: {integrity: sha512-0s7Mlrw9uTWkYua7xWr99Wpk2bnGa0ANleKfksYAES8LpWH4gW1OUr42vqKNf0us5UQNfru2wPqMqRITzq/SIQ==}
+  /@babel/parser/7.14.6:
+    resolution: {integrity: sha512-oG0ej7efjEXxb4UgE+klVx+3j4MVo+A2vCzm7OUN4CLo6WhQ+vSOD2yJ8m7B+DghObxtLxt3EfgMWpq+AsWehQ==}
     engines: {node: '>=6.0.0'}
     hasBin: true
     dev: true
@@ -1518,11 +1518,11 @@ packages:
     resolution: {integrity: sha512-xys5xi5JEhzC3RzEmSGrs/b3pJW/o87SypZ+G/PhaE7uqVQNv/jlmVIBXuoh5atqQ434LfXV+sf23Oxj0bchJQ==}
     dependencies:
       '@babel/code-frame': 7.16.0
-      '@babel/generator': 7.13.9
+      '@babel/generator': 7.16.0
       '@babel/helper-function-name': 7.16.0
       '@babel/helper-split-export-declaration': 7.16.0
-      '@babel/parser': 7.13.10
-      '@babel/types': 7.13.0
+      '@babel/parser': 7.16.0
+      '@babel/types': 7.16.0
       debug: 4.3.2
       globals: 11.12.0
       lodash: 4.17.21
@@ -3350,17 +3350,16 @@ packages:
       - '@types/react'
     dev: true
 
-  /@trivago/prettier-plugin-sort-imports/2.0.4:
-    resolution: {integrity: sha512-SCVUhQdbjn/Z4AY7b9JO00fZCeXxiVuarVxYP0n6cX2ijiQkE5HmGrOk32n0u385OebzQ9bZcrc51lAGLjXnFQ==}
+  /@trivago/prettier-plugin-sort-imports/3.1.1:
+    resolution: {integrity: sha512-T9EJNEOugWts4WxdmpWeY+sp+2fUHhvGh9QSBCowEGJfcbnu355HQRqok5bKwejdieMaI1+uGZhuTNMZwjqOCQ==}
     peerDependencies:
       prettier: 2.x
     dependencies:
       '@babel/core': 7.13.10
       '@babel/generator': 7.13.9
-      '@babel/parser': 7.13.10
+      '@babel/parser': 7.14.6
       '@babel/traverse': 7.13.0
       '@babel/types': 7.13.0
-      '@types/lodash': 4.14.168
       javascript-natural-sort: 0.7.1
       lodash: 4.17.21
     transitivePeerDependencies:
@@ -3430,10 +3429,6 @@ packages:
 
   /@types/json-schema/7.0.9:
     resolution: {integrity: sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==}
-    dev: true
-
-  /@types/lodash/4.14.168:
-    resolution: {integrity: sha512-oVfRvqHV/V6D1yifJbVRU3TMp8OT6o6BG+U9MkwuJ3U8/CsDHvalRpsxBqivn71ztOFZBTfJMvETbqHiaNSj7Q==}
     dev: true
 
   /@types/lodash/4.14.176:
@@ -6141,7 +6136,7 @@ packages:
     resolution: {integrity: sha512-DUxuQaKoqfNne8iikd14SAkh5uw4+8vNifp6gmA73yYNS6ywLIWSLD/n/mBzHQRpW3J7rbATEakmiA8JvkTyZw==}
     engines: {node: '>=6.11.5', yarn: '>=1.0.0'}
     dependencies:
-      '@babel/code-frame': 7.10.4
+      '@babel/code-frame': 7.16.0
       chalk: 2.4.2
       micromatch: 3.1.10
       minimatch: 3.0.4
