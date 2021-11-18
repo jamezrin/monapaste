@@ -13,7 +13,7 @@ specifiers:
   '@storybook/react': 6.3.12
   '@trivago/prettier-plugin-sort-imports': 2.0.4
   '@types/next-auth': 3.13.0
-  '@types/node': 14.17.33
+  '@types/node': 14.17.34
   '@types/react': 17.0.35
   '@types/react-dom': 17.0.11
   axios: 0.24.0
@@ -58,7 +58,7 @@ devDependencies:
   '@storybook/react': 6.3.12_2c272164def6b7abcdc026a2c82f2700
   '@trivago/prettier-plugin-sort-imports': 2.0.4
   '@types/next-auth': 3.13.0
-  '@types/node': 14.17.33
+  '@types/node': 14.17.34
   '@types/react': 17.0.35
   '@types/react-dom': 17.0.11
   babel-loader: 8.2.3_@babel+core@7.16.0
@@ -1858,7 +1858,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.3
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       '@types/yargs': 15.0.14
       chalk: 4.1.2
     dev: true
@@ -2650,7 +2650,7 @@ packages:
       '@storybook/semver': 7.3.2
       '@storybook/theming': 6.3.12_react-dom@17.0.2+react@17.0.2
       '@storybook/ui': 6.3.12_754373e9ff7ac084ec3ce5a222b8dbcc
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       '@types/webpack': 4.41.31
       autoprefixer: 9.8.8
       babel-loader: 8.2.3_1bd60a6cd0f7024f034efd75ae733a3f
@@ -2894,7 +2894,7 @@ packages:
       '@storybook/semver': 7.3.2
       '@types/glob-base': 0.3.0
       '@types/micromatch': 4.0.2
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       '@types/pretty-hrtime': 1.0.1
       babel-loader: 8.2.3_1bd60a6cd0f7024f034efd75ae733a3f
       babel-plugin-macros: 3.1.0
@@ -2958,7 +2958,7 @@ packages:
       '@storybook/manager-webpack4': 6.3.12_36e86be85714e7fc818f043785c22a2d
       '@storybook/node-logger': 6.3.12
       '@storybook/semver': 7.3.2
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       '@types/node-fetch': 2.5.12
       '@types/pretty-hrtime': 1.0.1
       '@types/webpack': 4.41.31
@@ -3104,7 +3104,7 @@ packages:
       '@storybook/node-logger': 6.3.12
       '@storybook/theming': 6.3.12_react-dom@17.0.2+react@17.0.2
       '@storybook/ui': 6.3.12_754373e9ff7ac084ec3ce5a222b8dbcc
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       '@types/webpack': 4.41.31
       babel-loader: 8.2.3_1bd60a6cd0f7024f034efd75ae733a3f
       case-sensitive-paths-webpack-plugin: 2.4.0
@@ -3389,13 +3389,13 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 3.0.5
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
     dev: true
 
   /@types/graceful-fs/4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}
     dependencies:
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
     dev: true
 
   /@types/hast/2.3.4:
@@ -3465,7 +3465,7 @@ packages:
   /@types/next-auth/3.13.0:
     resolution: {integrity: sha512-zkEVDyoKgRsHm3KUaZoOGSThTS9h0+HbFZctiYbB5MMU6/pUZuF5ozWrVG00jotQJuSEIlPWzdCIXKlaHctJgw==}
     dependencies:
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       '@types/react': 17.0.35
       jose: 1.28.1
       typeorm: 0.2.38
@@ -3491,12 +3491,12 @@ packages:
   /@types/node-fetch/2.5.12:
     resolution: {integrity: sha512-MKgC4dlq4kKNa/mYrwpKfzQMB5X3ee5U6fSprkKpToBqBmX4nFZL9cW5jl6sWn+xpRJ7ypWh2yyqqr8UUCstSw==}
     dependencies:
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       form-data: 3.0.1
     dev: true
 
-  /@types/node/14.17.33:
-    resolution: {integrity: sha512-noEeJ06zbn3lOh4gqe2v7NMGS33jrulfNqYFDjjEbhpDEHR5VTxgYNQSBqBlJIsBJW3uEYDgD6kvMnrrhGzq8g==}
+  /@types/node/14.17.34:
+    resolution: {integrity: sha512-USUftMYpmuMzeWobskoPfzDi+vkpe0dvcOBRNOscFrGxVp4jomnRxWuVohgqBow2xyIPC0S3gjxV/5079jhmDg==}
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -3584,7 +3584,7 @@ packages:
   /@types/webpack-sources/3.2.0:
     resolution: {integrity: sha512-Ft7YH3lEVRQ6ls8k4Ff1oB4jN6oy/XmU6tQISKdhfh+1mR+viZFphS6WL0IrtDOzvefmJg5a0s7ZQoRXwqTEFg==}
     dependencies:
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       '@types/source-list-map': 0.1.2
       source-map: 0.7.3
     dev: true
@@ -3592,7 +3592,7 @@ packages:
   /@types/webpack/4.41.31:
     resolution: {integrity: sha512-/i0J7sepXFIp1ZT7FjUGi1eXMCg8HCCzLJEQkKsOtbJFontsJLolBcDC+3qxn5pPwiCt1G0ZdRmYRzNBtvpuGQ==}
     dependencies:
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       '@types/tapable': 1.0.8
       '@types/uglify-js': 3.13.1
       '@types/webpack-sources': 3.2.0
@@ -7335,7 +7335,7 @@ packages:
     dependencies:
       '@jest/types': 26.6.2
       '@types/graceful-fs': 4.1.5
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       anymatch: 3.1.2
       fb-watchman: 2.0.1
       graceful-fs: 4.2.8
@@ -7359,7 +7359,7 @@ packages:
     resolution: {integrity: sha512-S5wqyz0DXnNJPd/xfIzZ5Xnp1HrJWBczg8mMfMpN78OJ5eDxXyf+Ygld9wX1DnUWbIbhM1YDY95NjR4CBXkb2g==}
     engines: {node: '>= 10.14.2'}
     dependencies:
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       graceful-fs: 4.2.8
     dev: true
 
@@ -7368,7 +7368,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@jest/types': 26.6.2
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       chalk: 4.1.2
       graceful-fs: 4.2.8
       is-ci: 2.0.0
@@ -7379,7 +7379,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: true
@@ -7388,7 +7388,7 @@ packages:
     resolution: {integrity: sha512-mk0umAQ5lT+CaOJ+Qp01N6kz48sJG2kr2n1rX0koqKf6FIygQV0qLOdN9SCYID4IVeSigDOcPeGLozdMLYfb5g==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
-      '@types/node': 14.17.33
+      '@types/node': 14.17.34
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: false
