@@ -20,7 +20,7 @@ specifiers:
   babel-loader: 8.2.3
   babel-plugin-superjson-next: 0.4.2
   http-status-codes: 2.1.4
-  monaco-editor: 0.29.1
+  monaco-editor: 0.30.1
   nanoid: 3.1.30
   next: 11.1.2
   next-auth: 3.29.0
@@ -35,11 +35,11 @@ specifiers:
 dependencies:
   '@emotion/react': 11.6.0_f6c5a15aa5ec2e0fdeb6035d8ba56bed
   '@emotion/styled': 11.6.0_f29c3904a47513b46ae8dc7d3e981dfa
-  '@monaco-editor/react': 4.3.1_f0689466c0c38bde0d57c82418990dab
+  '@monaco-editor/react': 4.3.1_38e345af476e5e7cfa5440c4ff004a8f
   '@prisma/client': 3.5.0_prisma@3.5.0
   axios: 0.24.0
   http-status-codes: 2.1.4
-  monaco-editor: 0.29.1
+  monaco-editor: 0.30.1
   nanoid: 3.1.30
   next: 11.1.2_7d896d3fd24993c93e1290d869be1f34
   next-auth: 3.29.0_8dbff96a9ec3de3599c94fe7d80dbf9d
@@ -1912,24 +1912,24 @@ packages:
     resolution: {integrity: sha512-H1rQc1ZOHANWBvPcW+JpGwr+juXSxM8Q8YCkm3GhZd8REu1fHR3z99CErO1p9pkcfcxZnMdIZdIsXkOHY0NilA==}
     dev: true
 
-  /@monaco-editor/loader/1.2.0_monaco-editor@0.29.1:
+  /@monaco-editor/loader/1.2.0_monaco-editor@0.30.1:
     resolution: {integrity: sha512-cJVCG/T/KxXgzYnjKqyAgsKDbH9mGLjcXxN6AmwumBwa2rVFkwvGcUj1RJtD0ko4XqLqJxwqsN/Z/KURB5f1OQ==}
     peerDependencies:
       monaco-editor: '>= 0.21.0 < 1'
     dependencies:
-      monaco-editor: 0.29.1
+      monaco-editor: 0.30.1
       state-local: 1.0.7
     dev: false
 
-  /@monaco-editor/react/4.3.1_f0689466c0c38bde0d57c82418990dab:
+  /@monaco-editor/react/4.3.1_38e345af476e5e7cfa5440c4ff004a8f:
     resolution: {integrity: sha512-f+0BK1PP/W5I50hHHmwf11+Ea92E5H1VZXs+wvKplWUWOfyMa1VVwqkJrXjRvbcqHL+XdIGYWhWNdi4McEvnZg==}
     peerDependencies:
       monaco-editor: '>= 0.25.0 < 1'
       react: ^16.8.0 || ^17.0.0
       react-dom: ^16.8.0 || ^17.0.0
     dependencies:
-      '@monaco-editor/loader': 1.2.0_monaco-editor@0.29.1
-      monaco-editor: 0.29.1
+      '@monaco-editor/loader': 1.2.0_monaco-editor@0.30.1
+      monaco-editor: 0.30.1
       prop-types: 15.7.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -8023,8 +8023,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  /monaco-editor/0.29.1:
-    resolution: {integrity: sha512-rguaEG/zrPQSaKzQB7IfX/PpNa0qxF1FY8ZXRkN4WIl8qZdTQRSRJCtRto7IMcSgrU6H53RXI+fTcywOBC4aVw==}
+  /monaco-editor/0.30.1:
+    resolution: {integrity: sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==}
     dev: false
 
   /move-concurrently/1.0.1:
